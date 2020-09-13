@@ -1,0 +1,128 @@
+% ---------
+%  Compile with "pdflatex hw1".
+% --------
+%!TEX TS-program = pdflatex
+%!TEX encoding = UTF-8 Unicode
+
+% Template borrowed from Jeff Erickson.
+
+\documentclass[11pt]{article}
+\usepackage{jeffe,handout,graphicx}
+\usepackage[utf8]{inputenc}		% Allow some non-ASCII Unicode in source
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{arydshln}
+
+% =========================================================
+%   Define common stuff for solution headers
+% =========================================================
+\Class{CS 7301.003}
+\Semester{Fall 2020}
+\Authors{2}
+\AuthorOne{Author A. One}{aao123456}
+\AuthorTwo{Jiashuai Lu}{jxl173630}
+%\Section{}
+
+% =========================================================
+\begin{document}
+\HomeworkHeader{1}{1}% homework number, problem number
+% ---------------------------------------------------------
+\begin{enumerate}[(a)]\itemsep0pt
+  \item
+    Truthfully write the phrase \EMPH{\color{red} ``I have read and understand the course
+    policies.''}
+
+\begin{solution}
+  I have read and understand the course policies.
+\end{solution}
+
+  \item[(b)]
+    Prove that the composition of two PL homeomorphisms of the plane is another PL homeomorphism.
+
+\begin{solution}
+  Kyle likes to start inline math mode using ``\textbackslash('' and end it using
+  ``\textbackslash)'', but most online guides start and end math mode with ``\$''.
+  Whatever you prefer is fine!
+\end{solution}
+
+  \item[(c)]
+    Suppose \(\phi\) is a PL homeomorphism with complexity \(x\) and \(\psi\) is a PL
+    homeomorphism with complexity \(y\).
+    What can you say about the complexity of the PL homeomorphism \(\psi \circ \phi\)?
+
+\begin{solution}
+    Sometimes, you don't want to use inline math.
+
+    \[1 < 2 = 6 / 3\]
+\end{solution}
+
+  \item[(d)]
+    Prove that for any simple \(n\)-gon \(P\), there is a piecewise-linear homeomorphism \(\phi :
+    \R^2 \to \R^2\) with complexity \(O(n)\) that maps the polygon \(P\) to a triangle.
+
+\begin{solution}
+  Sometimes, it's convenient to use pseudocode:
+  \begin{algo}
+    \textul{\(\textsc{SolveHomework}(problems[1..n])\):}\+
+    \\  Set up boilerplate for writing homework.
+    \\
+    \\  for \(i \gets 1\) to \(n\)\+
+    \\    Read problem \(problems[i]\)
+    \\    for \(j \gets i\) down to \(1\)\+
+    \\      \(\textsc{ThinkAboutProblem}(i)\)\-
+    \\    Write solution to problem \(problems[i]\)\-
+    \\
+    \\  Turn in homework
+  \end{algo}
+\end{solution}
+
+  \item[(e)]
+    Prove that for any two simple \(n\)-gons \(P\) and \(Q\), there is a piecewise-linear
+    homeomorphism \(\phi : \R^2 \to \R^2\) with complexity \(O(n^2)\) such that \(\phi(P) = Q\).
+
+\begin{solution}
+  Does this problem have too many parts?
+\end{solution}
+\end{enumerate}
+
+% ---------------------------------------------------------
+\HomeworkHeader{1}{2}% homework number, problem number
+% ---------------------------------------------------------
+\begin{enumerate}[(a)]\itemsep0pt
+  \item
+    Prove that every connected plane graph has either a vertex with degree at most \(3\) or a face
+    with degree at most \(3\).
+
+\begin{solution}
+  I guess it's hard to fit lot of big objects in the plane.
+\end{solution}
+
+  \item[(b)]
+    Prove that every simple bipartite planar graph has at most~\(2n - 4\) edges.
+
+\begin{solution}
+  Like really hard.
+\end{solution}
+\end{enumerate}
+
+% ---------------------------------------------------------
+\HomeworkHeader{1}{3}% homework number, problem number
+% ---------------------------------------------------------
+Let~\(G\) be an arbitrary plane graph, let~\(T\) be an arbitrary spanning tree of~\(G\), and
+let~\(e\) be an arbitrary edge of~\(T\).
+Color the vertices in one component of~\(T \setminus e\) red and the vertices in the other
+component blue.
+Prove that any face of~\(G\) is incident to either zero or two edges that have one red endpoint
+and one blue endpoint.
+
+\begin{solution}
+  Sometimes a figure is useful.
+  This is a topology course, after all.
+  \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{fig/temoc}
+    \caption{Temoc is blue, like certain subsets of vertices.}
+    \label{fig:temoc}
+  \end{figure}
+\end{solution}
+\end{document}
