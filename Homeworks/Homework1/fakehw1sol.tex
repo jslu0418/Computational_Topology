@@ -40,9 +40,19 @@
     Prove that the composition of two PL homeomorphisms of the plane is another PL homeomorphism.
 
 \begin{solution}
-  Kyle likes to start inline math mode using ``\textbackslash('' and end it using
-  ``\textbackslash)'', but most online guides start and end math mode with ``\$''.
-  Whatever you prefer is fine!
+  Let \(\psi\) and \(\phi\) be any two PL homeomorphisms.
+  Let \(\Delta_{\mathbb{H}}\) denote a triangulation of a PL homeomorphism \(\mathbb{H}\) such that the number of triangles in it is the complexity of \(\mathbb{H}\).
+
+  In order to show \(\theta=\psi\circ\phi\) is also a PL homeomorphism, we construct a triangulation \(\Delta\) of the plane such that the restriction of \(\theta\) to any triangle in \(\Delta\) is affine.
+
+  First let \(\Delta=\Delta_{\psi}\).
+  Since \(\Delta_{\psi}\) and \(\Delta_{\phi}\) are trigulations of the plane, every point of the plane is both in a unique triangle of \(\Delta_{\psi}\) and a unique triangle of \(\Delta_{\phi}\), and every triangle of \(\Delta\) overlaps with one or more triangles of \(\Delta_{\phi}\).
+
+  For each triangle \(T\) of \(\Delta\), for every triangle \(T'\) of \(\Delta_{\phi}\) such that \(T\) and \(T'\) overlap, if the overlap of \(T\) and \(T'\) is a triangle, we add vertices of this triangle to \(\Delta\) (if a vertex is already in \(\Delta\), we skip it) and add edge between any two of those three vertices if the edge not already exists in \(\Delta\).
+ Otherwise, the overlap is a \(n\)-gon with \(4\le n\le 6\). Similarly, we add vertices and edges of this \(n\)-gon to \(\Delta\). Then we create a frugal trigulation of this \(n\)-gon in \(\Delta\).
+
+ It is not hard to see that now \(\Delta\) is also a triangulation of the plane. Let \(f|_{R}\) denote the restriction of function \(f\) to a region \(R\). Let \(T\) be any triangle of \(\Delta\). Then \(T\) is either whole or part of the overlap of some triangle \(T'\) of \(\Delta_{\psi}\) and a triangle \(T''\) of \(\Delta_{\phi}\), \(\Theta|_{T}\) to this triangle is the composition of two affine maps \(\psi|_{T'}\) and \(\phi|_{T''}\), i.e., \(\theta|_{T}=\psi_{T'}\circ \phi|_{T''}\). The composition of two affine maps are also affine. Therefore, \(\Delta\) is a triangulation such that the restriction of \(\psi\circ \phi\) to any triangle of it is affine. The composition of two PL homeomorphisms of the plane is another PL homeomorphism.
+
 \end{solution}
 
   \item[(c)]
@@ -51,9 +61,17 @@
     What can you say about the complexity of the PL homeomorphism \(\psi \circ \phi\)?
 
 \begin{solution}
-    Sometimes, you don't want to use inline math.
+  We reuse notations in Solution(b).
+  Given the procedure we used to build a triangulation for the PL homeomorphism \(\psi\circ \phi\) in Solution(b), let \(|\Delta|\) denote the number of triangles in triangulation \(\Delta\), we observe that the complexity of \(\psi\circ \phi\) will be at most
+  \[\min_{\Delta_{\psi},\Delta_{\phi}}|\Delta|\]
+  where \(\Delta_{\psi}/\Delta_{\phi}\) is any triangulation of the plane such that the restriction of \(\psi/\phi\) to every triangle in it is affine, and \(\Delta\) is the triangulation we build using the procedure in Solution(b) with \(\Delta_{\psi}\) and \(\Delta_{\phi}\) as inputs.
 
-    \[1 < 2 = 6 / 3\]
+  We can find an upper bound for \(|\Delta|\) given \(|\Delta_{\psi}|\) and \(|\Delta_{\phi}|\). For every triangle \(T\) in \(\Delta_{\psi}\), at most \(|\Delta_{\phi}|\) triangles of \(\Delta_{\phi}\) overlap with \(T\). Every overlap corresponds to at most \(4\) triangles in \(\Delta\) because the overlap part is at most a \(6\)-gon. Therefore, we have
+  \[|\Delta|\le 4\cdot|\Delta_{\psi}|\cdot|\Delta_{\phi}|.\]
+  and because there exist at least one triangulation \(|\Delta_{\psi}|=x\) and one triangulation \(|Delta_{\phi}|=y\), we can infer the complexity of \(\psi\circ\phi\) is at most
+  \[\min_{\Delta_{\psi},\Delta_{\phi}}|\Delta|\le 4\cdot x\cdot y\]
+
+  On the other hand, we think we cannot say anything about the lower bound of the complexity of \(\psi\circ\phi\). It could be only \(2\) while the affine map of \(\psi\circ\phi\) could be the same at every point on the plane which depends on \(\psi\) and \(\phi\).
 \end{solution}
 
   \item[(d)]
@@ -61,19 +79,6 @@
     \R^2 \to \R^2\) with complexity \(O(n)\) that maps the polygon \(P\) to a triangle.
 
 \begin{solution}
-  Sometimes, it's convenient to use pseudocode:
-  \begin{algo}
-    \textul{\(\textsc{SolveHomework}(problems[1..n])\):}\+
-    \\  Set up boilerplate for writing homework.
-    \\
-    \\  for \(i \gets 1\) to \(n\)\+
-    \\    Read problem \(problems[i]\)
-    \\    for \(j \gets i\) down to \(1\)\+
-    \\      \(\textsc{ThinkAboutProblem}(i)\)\-
-    \\    Write solution to problem \(problems[i]\)\-
-    \\
-    \\  Turn in homework
-  \end{algo}
 \end{solution}
 
   \item[(e)]
@@ -81,7 +86,26 @@
     homeomorphism \(\phi : \R^2 \to \R^2\) with complexity \(O(n^2)\) such that \(\phi(P) = Q\).
 
 \begin{solution}
-  Does this problem have too many parts?
+  From Problem(d), we know there exists two PL homeomorphism \(\phi_P,\phi_Q\) with complexity \(O(n)\) that map \(P\) and \(Q\) to triangles.
+
+  Let \(\phi_P(P)=T_P\) and \(\phi_Q(Q)=T_Q\). Let \(\{v_{p1},v_{p2},v_{p3}\}\) be vertices of \(T_P\) and \(\{v_{q1},v_{q2},v_{q3}\}\) be edges of \(T_Q\).
+
+  For \(i\in\{1,2,3\}\), fix an extra point \(v_i\) close to the middle point of edge \(\{v_{pi},v_{p(i+1)}\}\) and outside \(T_p\). Let \(T_i\) denote the triangle with vertices \(\{v_i,v_{pi},v_{p(i+1)}\}\). We build a mapping \(\psi_i\) that maps \(v_{pi},v_{p(i+1)}\) to \(v_{qi},v_{q(i+1)}\) (let \(v_{p4}=v_{p1}, v_{q4}=v_{q1}\)).
+  Then we extend \(\psi_i\) across triangle \(T_i\) and keep it as identity map outside this triangle.
+
+  It is easy to see \(\forall i\), \(\psi_i\) is a PL homeomorphism of \(O(1)\) complexity that maps edge \(\{v_{pi},v_{p(i+1)}\}\) to edge \(\{v_{qi},v_{q(i+1)}\}\) because we can build a triangulation of the plane by use triangle \(T_i\) and triangulate \(\mathbb{R}^2\backslash T_i\) with \(6\) triangles such that the restriction of \(\psi_i\) to any triangle in it is affine.
+  Therefore, we now have \(\psi_1\circ\psi_2\circ \psi_3(T_P)=T_Q\).
+
+  Let \(\phi^{-1}_Q\) be the reverse of \(\phi_Q\). The complexity of \(\phi^{-1}_Q\) is same as \(\phi_Q\) which is \(O(n)\) and \(\phi^{-1}_Q(T_Q)=Q\).
+  Put them together we get \(\phi^{-1}_Q\circ\psi_1\circ\psi_2\circ\psi_3\circ\phi_P(P)=Q\).
+
+  Let \(\psi=\phi^{-1}_Q\circ\psi_1\circ\psi_2\circ\psi_3\circ\phi_P\).
+  From Solution(b) we know \(\psi\) is a PL homeomorphism.
+  Let \(|\phi|\) denote the complexity of a PL homeomorphism \(\phi\).
+  From Solution(c) we know the complexity of \(\psi\) is at most
+  \[4^4\cdot|\phi^{-1}_Q|\cdot|\psi_1|\cdot|\psi_2|\cdot|\psi_3|\cdot\phi_P\le O(n^2)\]
+
+
 \end{solution}
 \end{enumerate}
 
@@ -94,14 +118,32 @@
     with degree at most \(3\).
 
 \begin{solution}
-  I guess it's hard to fit lot of big objects in the plane.
+  We suppose there is a plane graph \(G\) of \(n\) vertices, \(m\) edges and \(f\) faces with every vertex has degree at least \(4\) and every face has degree at least \(4\).
+
+  Every edge can be shared by at most two faces and at most two vertices in \(G\). So we know
+  \[4n\le 2m,\:4f\le 2m\implies n+f-m\le 0\]
+  According to Euler Formula, \(n+f-m=2\) as \(G\) is a connected plane graph. A contradiction. Therefore, every connected plane graph has either a vertex with degree at most \(3\) or a grace with degree at most \(3\).
 \end{solution}
 
   \item[(b)]
     Prove that every simple bipartite planar graph has at most~\(2n - 4\) edges.
 
 \begin{solution}
-  Like really hard.
+  We assume \(n\ge 3\) since if \(n=2\) the bipartite planer graph with \(1\ge 2\cdot 2-4\) edge.
+
+  We prove the argument by considering the following two cases:
+  \begin{enumerate}[1)]\itemsep0pt
+  \item The graph only has one face.
+
+    In this case, \(n+m-f=2\implies m=n-1\implies m\le 2n-4, \forall n\ge 3\)
+  \item The graph has more than one face.
+    In this case, every cycle in this graph is even size, which means every face has degree \(\ge 4\) including the outer face.
+    Every edge is shared by at most two faces.
+    So \(4f\le 2e\implies e\ge 2f\).
+
+    According to Euler Formula, \(2n+2f-2e=4\implies 2n-4=2e-2f\ge e\).
+    Therefore, every simple bipartite planar graph as at most \(2n-4\) edges if \(n\ge 3\).
+  \end{enumerate}
 \end{solution}
 \end{enumerate}
 
@@ -116,13 +158,34 @@ Prove that any face of~\(G\) is incident to either zero or two edges that have o
 and one blue endpoint.
 
 \begin{solution}
-  Sometimes a figure is useful.
-  This is a topology course, after all.
-  \begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.3]{fig/temoc}
-    \caption{Temoc is blue, like certain subsets of vertices.}
-    \label{fig:temoc}
-  \end{figure}
+  We say an edge \(\emph{bicolor}\) if it have one red endpoint and one blue endpoint.
+
+  First we notice that no edge in \(T\backslash e\) is bicolor. All dual bicolor edges are in \(G^*\backslash T^* \cup \{e^*\}\).
+  Let \(C^*\) be the unique dual cycle in \(G^*\backslash T^* \cup \{e^*\}\).
+  To prove the proposition, we show that all dual bicolor edges are in \(C^*\) and all dual edges in \(C^*\) are bicolor.
+
+  Notice that \(C^*\) separates \(G^*\) into two components.
+  Let \(R^*,B^*\) be those two components in \(G^*\backslash C^*\) such that \(R^*\) contains the red dual face adjacent to the dual edge \(e^*\) and \(B^*\) contains the blud dual face adjacent to \(e^*\).
+
+  Because red vertices in \(G\) are all in one component of \(T\backslash e\), they are still connected in \(G\backslash C\).
+  So red dual faces in \(G^*\backslash C^*\) are also connected.
+  Similarly, we can see blue dual faces in \(G^*\backslash C^*\) are connected.
+
+  Since we know there is at least one red dual face in \(R^*\) and at least one blue dual face in \(B^*\), from the connectivity argument above, we can also infer that no red dual face is in \(B^*\) and no blue dual faces is in \(R^*\).
+  Plus the fact that every vertex is either red or blue, it is easy to see every dual face in \(R^*\) is red and every dual face in \(B^*\) is blue.
+
+
+  According to the way we define bicolor, all dual edges in \(R^*\) and \(B^*\) are not bicolor because every dual edge in \(R^*\) and \(B^*\) is shared by two dual faces with same color.
+  Moreover, every dual edge in \(C^*\) is shared one dual face in \(R^*\) and one dual face in \(B^*\).
+  So we proved that no dual edge in \(G^*\backslash C^*\) is bicolor and all dual edges in \(C^*\) are bicolor.
+
+  Every dual vertex in \(C^*\) is incident to exact two dual edges in \(C^*\), its corresponding primal face is incident to two bicolor edges. Every dual vertex in \(G^*\backslash C^*\) is incident no dual edge in \(C^*\), its corresponding primal face is incident to zero bicolor edge. The proposition is proved.
+
+
 \end{solution}
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
