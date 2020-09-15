@@ -41,17 +41,20 @@
 
 \begin{solution}
   Let \(\psi\) and \(\phi\) be any two PL homeomorphisms.
-  Let \(\Delta_{\mathbb{H}}\) denote a triangulation of a PL homeomorphism \(\mathbb{H}\) such that the number of triangles in it is the complexity of \(\mathbb{H}\).
+  Let \(\Delta_{\mathbb{H}}\) denote a triangulation of a PL homeomorphism \(\mathbb{H}\) such that the number of triangles in it is equal to the complexity of \(\mathbb{H}\).
 
   In order to show \(\theta=\psi\circ\phi\) is also a PL homeomorphism, we construct a triangulation \(\Delta\) of the plane such that the restriction of \(\theta\) to any triangle in \(\Delta\) is affine.
 
   First let \(\Delta=\Delta_{\psi}\).
-  Since \(\Delta_{\psi}\) and \(\Delta_{\phi}\) are trigulations of the plane, every point of the plane is both in a unique triangle of \(\Delta_{\psi}\) and a unique triangle of \(\Delta_{\phi}\), and every triangle of \(\Delta\) overlaps with one or more triangles of \(\Delta_{\phi}\).
+  Since \(\Delta_{\psi}\) and \(\Delta_{\phi}\) are trigulations of the plane, every point of the plane is both in a unique triangle of \(\Delta_{\psi}\) and a unique triangle of \(\Delta_{\phi}\), and every triangle of \(\Delta\) overlaps with at least one triangle of \(\Delta_{\phi}\).
 
-  For each triangle \(T\) of \(\Delta\), for every triangle \(T'\) of \(\Delta_{\phi}\) such that \(T\) and \(T'\) overlap, if the overlap of \(T\) and \(T'\) is a triangle, we add vertices of this triangle to \(\Delta\) (if a vertex is already in \(\Delta\), we skip it) and add edge between any two of those three vertices if the edge not already exists in \(\Delta\).
- Otherwise, the overlap is a \(n\)-gon with \(4\le n\le 6\). Similarly, we add vertices and edges of this \(n\)-gon to \(\Delta\). Then we create a frugal trigulation of this \(n\)-gon in \(\Delta\).
+  For each triangle \(T\) of \(\Delta\), for every triangle \(T'\) of \(\Delta_{\phi}\) such that \(T\) and \(T'\) overlap, if the overlap of \(T\) and \(T'\) is not a line segment, it must be an \(n\)-gon where \(n\in\{3,4,5,6\}\), we add this \(n\)-gon to \(\Delta\) and create a frugal trigulation for this \(n\)-gon in \(\Delta\) if \(n>3\).
 
- It is not hard to see that now \(\Delta\) is also a triangulation of the plane. Let \(f|_{R}\) denote the restriction of function \(f\) to a region \(R\). Let \(T\) be any triangle of \(\Delta\). Then \(T\) is either whole or part of the overlap of some triangle \(T'\) of \(\Delta_{\psi}\) and a triangle \(T''\) of \(\Delta_{\phi}\), \(\Theta|_{T}\) to this triangle is the composition of two affine maps \(\psi|_{T'}\) and \(\phi|_{T''}\), i.e., \(\theta|_{T}=\psi_{T'}\circ \phi|_{T''}\). The composition of two affine maps are also affine. Therefore, \(\Delta\) is a triangulation such that the restriction of \(\psi\circ \phi\) to any triangle of it is affine. The composition of two PL homeomorphisms of the plane is another PL homeomorphism.
+  It is not hard to see that now \(\Delta\) is also a triangulation of the plane. Let \(f|_{R}\) denote the restriction of function \(f\) to a region \(R\). Let \(T\) be any triangle of \(\Delta\).
+  Then \(T\) is either whole or part of the overlap of some triangle \(T'\) of \(\Delta_{\psi}\) and a triangle \(T''\) of \(\Delta_{\phi}\).
+  Therefore, \(\Theta|_{T}\) to this triangle is the composition of two affine maps \(\psi|_{T'}\) and \(\phi|_{T''}\), i.e., \(\theta|_{T}=\psi_{T'}\circ \phi|_{T''}\).
+  Since the composition of two affine maps are also affine, \(\Delta\) is a triangulation such that the restriction of \(\psi\circ \phi\) to any triangle of it is affine.
+  The composition of two PL homeomorphisms of the plane is another PL homeomorphism.
 
 \end{solution}
 
@@ -61,14 +64,15 @@
     What can you say about the complexity of the PL homeomorphism \(\psi \circ \phi\)?
 
 \begin{solution}
-  We reuse notations in Solution(b).
-  Given the procedure we used to build a triangulation for the PL homeomorphism \(\psi\circ \phi\) in Solution(b), let \(|\Delta|\) denote the number of triangles in triangulation \(\Delta\), we observe that the complexity of \(\psi\circ \phi\) will be at most
+  We reuse some notations in Solution(b).
+  Given the procedure we used to build a triangulation for the PL homeomorphism \(\psi\circ \phi\) in Solution(b), let \(|\Delta|\) denote the number of triangles in triangulation \(\Delta\), we observe that the complexity of \(\psi\circ \phi\) will be \EMPH{at most}
   \[\min_{\Delta_{\psi},\Delta_{\phi}}|\Delta|\]
   where \(\Delta_{\psi}/\Delta_{\phi}\) is any triangulation of the plane such that the restriction of \(\psi/\phi\) to every triangle in it is affine, and \(\Delta\) is the triangulation we build using the procedure in Solution(b) with \(\Delta_{\psi}\) and \(\Delta_{\phi}\) as inputs.
 
-  We can find an upper bound for \(|\Delta|\) given \(|\Delta_{\psi}|\) and \(|\Delta_{\phi}|\). For every triangle \(T\) in \(\Delta_{\psi}\), at most \(|\Delta_{\phi}|\) triangles of \(\Delta_{\phi}\) overlap with \(T\). Every overlap corresponds to at most \(4\) triangles in \(\Delta\) because the overlap part is at most a \(6\)-gon. Therefore, we have
+  We could find an upper bound for \(|\Delta|\) given \(|\Delta_{\psi}|\) and \(|\Delta_{\phi}|\).
+  For every triangle \(T\) in \(\Delta_{\psi}\), at most \(|\Delta_{\phi}|\) triangles of \(\Delta_{\phi}\) overlap with \(T\). Every overlap corresponds to at most \(4\) triangles in \(\Delta\) because the overlap part is at most a simple \(6\)-gon. Therefore, we have
   \[|\Delta|\le 4\cdot|\Delta_{\psi}|\cdot|\Delta_{\phi}|.\]
-  and because there exist at least one triangulation \(|\Delta_{\psi}|=x\) and one triangulation \(|Delta_{\phi}|=y\), we can infer the complexity of \(\psi\circ\phi\) is at most
+  and because there exist at least one triangulation \(\Delta_{\psi}\) with \(|\Delta_{\psi}|=x\) and one triangulation \(\Delta_{\phi}\) with \(|\Delta_{\phi}|=y\), we can see the \EMPH{complexity of} \(\psi\circ\phi\) is \EMPH{at most}
   \[\min_{\Delta_{\psi},\Delta_{\phi}}|\Delta|\le 4\cdot x\cdot y\]
 
   On the other hand, we think we cannot say anything about the lower bound of the complexity of \(\psi\circ\phi\). It could be only \(2\) while the affine map of \(\psi\circ\phi\) could be the same at every point on the plane which depends on \(\psi\) and \(\phi\).
@@ -86,17 +90,20 @@
     homeomorphism \(\phi : \R^2 \to \R^2\) with complexity \(O(n^2)\) such that \(\phi(P) = Q\).
 
 \begin{solution}
-  From Problem(d), we know there exists two PL homeomorphism \(\phi_P,\phi_Q\) with complexity \(O(n)\) that map \(P\) and \(Q\) to triangles.
+  From Problem(d), we know there exist two PL homeomorphism \(\phi_P,\phi_Q\) with complexity \(O(n)\) that map \(P\) and \(Q\) to two triangles.
 
-  Let \(\phi_P(P)=T_P\) and \(\phi_Q(Q)=T_Q\). Let \(\{v_{p1},v_{p2},v_{p3}\}\) be vertices of \(T_P\) and \(\{v_{q1},v_{q2},v_{q3}\}\) be edges of \(T_Q\).
+  Let \(\phi_P(P)=T_P\) and \(\phi_Q(Q)=T_Q\). Let \(\{v_{p1},v_{p2},v_{p3}\}\) be vertices of \(T_P\) and \(\{v_{q1},v_{q2},v_{q3}\}\) be vertices of \(T_Q\).
 
-  For \(i\in\{1,2,3\}\), fix an extra point \(v_i\) close to the middle point of edge \(\{v_{pi},v_{p(i+1)}\}\) and outside \(T_p\). Let \(T_i\) denote the triangle with vertices \(\{v_i,v_{pi},v_{p(i+1)}\}\). We build a mapping \(\psi_i\) that maps \(v_{pi},v_{p(i+1)}\) to \(v_{qi},v_{q(i+1)}\) (let \(v_{p4}=v_{p1}, v_{q4}=v_{q1}\)).
+  For \(i\in\{1,2,3\}\), fix an extra point \(v_i\) close to the middle point of edge \(\{v_{pi},v_{p(i+1)}\}\) and outside \(T_p\).
+  Let \(T_i\) denote the triangle with vertices \(\{v_i,v_{pi},v_{p(i+1)}\}\).
+  We build a mapping \(\psi_i\) that maps \(v_{pi},v_{p(i+1)}\) to \(v_{qi},v_{q(i+1)}\) (let \(v_{p4}=v_{p1}, v_{q4}=v_{q1}\)).
   Then we extend \(\psi_i\) across triangle \(T_i\) and keep it as identity map outside this triangle.
 
   It is easy to see \(\forall i\), \(\psi_i\) is a PL homeomorphism of \(O(1)\) complexity that maps edge \(\{v_{pi},v_{p(i+1)}\}\) to edge \(\{v_{qi},v_{q(i+1)}\}\) because we can build a triangulation of the plane by use triangle \(T_i\) and triangulate \(\mathbb{R}^2\backslash T_i\) with \(6\) triangles such that the restriction of \(\psi_i\) to any triangle in it is affine.
   Therefore, we now have \(\psi_1\circ\psi_2\circ \psi_3(T_P)=T_Q\).
 
-  Let \(\phi^{-1}_Q\) be the reverse of \(\phi_Q\). The complexity of \(\phi^{-1}_Q\) is same as \(\phi_Q\) which is \(O(n)\) and \(\phi^{-1}_Q(T_Q)=Q\).
+  Let \(\phi^{-1}_Q\) be the inverse of \(\phi_Q\).
+  The complexity of \(\phi^{-1}_Q\) is same as \(\phi_Q\) which is \(O(n)\) and \(\phi^{-1}_Q(T_Q)=Q\).
   Put them together we get \(\phi^{-1}_Q\circ\psi_1\circ\psi_2\circ\psi_3\circ\phi_P(P)=Q\).
 
   Let \(\psi=\phi^{-1}_Q\circ\psi_1\circ\psi_2\circ\psi_3\circ\phi_P\).
@@ -129,7 +136,10 @@
     Prove that every simple bipartite planar graph has at most~\(2n - 4\) edges.
 
 \begin{solution}
-  We assume \(n\ge 3\) since if \(n=2\) the bipartite planer graph with \(1\ge 2\cdot 2-4\) edge.
+  We assume \(n\ge 3\) since if \(n=2\) the bipartite planar graph could have \(1\ge 2\cdot 2-4\) edge.
+
+  Without loss of generality, we assume the graph is connected.
+  If the graph has more than one connected components, for every connected component, suppose the number of vertices in it is \(n_i\), if the number of edges is at most \(2n_i-4\), then the number of edges in the graph is at most \(2n-4\).
 
   We prove the argument by considering the following two cases:
   \begin{enumerate}[1)]\itemsep0pt
@@ -137,12 +147,12 @@
 
     In this case, \(n+m-f=2\implies m=n-1\implies m\le 2n-4, \forall n\ge 3\)
   \item The graph has more than one face.
-    In this case, every cycle in this graph is even size, which means every face has degree \(\ge 4\) including the outer face.
+    In this case, every cycle in this graph is of even size, which means every face has degree \(\ge 4\) including the outer face.
     Every edge is shared by at most two faces.
     So \(4f\le 2e\implies e\ge 2f\).
 
     According to Euler Formula, \(2n+2f-2e=4\implies 2n-4=2e-2f\ge e\).
-    Therefore, every simple bipartite planar graph as at most \(2n-4\) edges if \(n\ge 3\).
+    Therefore, every simple bipartite planar graph has at most \(2n-4\) edges if \(n\ge 3\).
   \end{enumerate}
 \end{solution}
 \end{enumerate}
@@ -176,7 +186,7 @@ and one blue endpoint.
 
 
   According to the way we define bicolor, all dual edges in \(R^*\) and \(B^*\) are not bicolor because every dual edge in \(R^*\) and \(B^*\) is shared by two dual faces with same color.
-  Moreover, every dual edge in \(C^*\) is shared one dual face in \(R^*\) and one dual face in \(B^*\).
+  Moreover, every dual edge in \(C^*\) is shared by one dual face in \(R^*\) and one dual face in \(B^*\).
   So we proved that no dual edge in \(G^*\backslash C^*\) is bicolor and all dual edges in \(C^*\) are bicolor.
 
   Every dual vertex in \(C^*\) is incident to exact two dual edges in \(C^*\), its corresponding primal face is incident to two bicolor edges. Every dual vertex in \(G^*\backslash C^*\) is incident no dual edge in \(C^*\), its corresponding primal face is incident to zero bicolor edge. The proposition is proved.
