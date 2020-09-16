@@ -90,27 +90,15 @@
     homeomorphism \(\phi : \R^2 \to \R^2\) with complexity \(O(n^2)\) such that \(\phi(P) = Q\).
 
 \begin{solution}
-  From Problem(d), we know there exist two PL homeomorphism \(\phi_P,\phi_Q\) with complexity \(O(n)\) that map \(P\) and \(Q\) to two triangles.
+  From Problem(d), we know there exist two PL homeomorphism \(\phi_P,\phi_Q\) with complexity \(O(n)\) that map \(P\) and \(Q\) to the same triangle.
+  Let \(\phi^{-1}_Q\) denote the inverse of \(\phi_Q\), the complexity of \(\phi^{-1}_Q\) should be same as \(\phi_Q\).
 
-  Let \(\phi_P(P)=T_P\) and \(\phi_Q(Q)=T_Q\). Let \(\{v_{p1},v_{p2},v_{p3}\}\) be vertices of \(T_P\) and \(\{v_{q1},v_{q2},v_{q3}\}\) be vertices of \(T_Q\).
-
-  For \(i\in\{1,2,3\}\), fix an extra point \(v_i\) close to the middle point of edge \(\{v_{pi},v_{p(i+1)}\}\) and outside \(T_p\).
-  Let \(T_i\) denote the triangle with vertices \(\{v_i,v_{pi},v_{p(i+1)}\}\).
-  We build a mapping \(\psi_i\) that maps \(v_{pi},v_{p(i+1)}\) to \(v_{qi},v_{q(i+1)}\) (let \(v_{p4}=v_{p1}, v_{q4}=v_{q1}\)).
-  Then we extend \(\psi_i\) across triangle \(T_i\) and keep it as identity map outside this triangle.
-
-  It is easy to see \(\forall i\), \(\psi_i\) is a PL homeomorphism of \(O(1)\) complexity that maps edge \(\{v_{pi},v_{p(i+1)}\}\) to edge \(\{v_{qi},v_{q(i+1)}\}\) because we can build a triangulation of the plane by use triangle \(T_i\) and triangulate \(\mathbb{R}^2\backslash T_i\) with \(6\) triangles such that the restriction of \(\psi_i\) to any triangle in it is affine.
-  Therefore, we now have \(\psi_1\circ\psi_2\circ \psi_3(T_P)=T_Q\).
-
-  Let \(\phi^{-1}_Q\) be the inverse of \(\phi_Q\).
-  The complexity of \(\phi^{-1}_Q\) is same as \(\phi_Q\) which is \(O(n)\) and \(\phi^{-1}_Q(T_Q)=Q\).
-  Put them together we get \(\phi^{-1}_Q\circ\psi_1\circ\psi_2\circ\psi_3\circ\phi_P(P)=Q\).
-
-  Let \(\psi=\phi^{-1}_Q\circ\psi_1\circ\psi_2\circ\psi_3\circ\phi_P\).
-  From Solution(b) we know \(\psi\) is a PL homeomorphism.
+  Then we have \(\phi^{-1}_Q\circ\phi_P(P)=Q\).
+  Let \(\psi=\phi^{-1}_Q\circ \phi_P\).
+  From Solution(b) we know \(\psi\) is a PL homeomorphism that maps \(P\) to \(Q\).
   Let \(|\phi|\) denote the complexity of a PL homeomorphism \(\phi\).
   From Solution(c) we know the complexity of \(\psi\) is at most
-  \[4^4\cdot|\phi^{-1}_Q|\cdot|\psi_1|\cdot|\psi_2|\cdot|\psi_3|\cdot\phi_P\le O(n^2)\]
+  \[O(|\phi^{-1}_Q|)\cdot O(|\phi_P|)\le O(n^2)\]
 
 
 \end{solution}
