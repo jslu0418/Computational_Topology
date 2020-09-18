@@ -75,7 +75,9 @@
   and because there exist at least one triangulation \(\Delta_{\psi}\) with \(|\Delta_{\psi}|=x\) and one triangulation \(\Delta_{\phi}\) with \(|\Delta_{\phi}|=y\), we can see the \EMPH{complexity of} \(\psi\circ\phi\) is \EMPH{at most}
   \[\min_{\Delta_{\psi},\Delta_{\phi}}|\Delta|\le 4\cdot x\cdot y\]
 
-  On the other hand, we think we cannot say anything about the lower bound of the complexity of \(\psi\circ\phi\). It could be only \(2\) while the affine map of \(\psi\circ\phi\) could be the same at every point on the plane which depends on \(\psi\) and \(\phi\).
+  On the other hand, we think we cannot say anything about the lower bound of the complexity of \(\psi\circ\phi\). It could be only \(2\) while \(\psi=\phi^{-1}\).
+
+  If we assume nothing about the relation between \(\psi\) and \(\phi\), the lower bound of the complexity of \(\psi\circ \phi\) is \(\ge\max\{x,y\}\), the equality holds when there exist \(\Delta_{\psi}\) and \(\Delta_{\phi}\) with \(|\Delta_{\psi}|=x,|\Delta_{\phi}|=y\) such that no edge in \(\Delta_{\psi}\) intersect edges in \(\Delta_{\phi}\) except at the endpoints.
 \end{solution}
 
   \item[(d)]
@@ -156,27 +158,13 @@ Prove that any face of~\(G\) is incident to either zero or two edges that have o
 and one blue endpoint.
 
 \begin{solution}
-  We say an edge \(\emph{bicolor}\) if it have one red endpoint and one blue endpoint.
+  We say an edge \(\emph{bicolor}\) if it has one red endpoint and one blue endpoint.
 
-  First we notice that no edge in \(T\backslash e\) is bicolor. All dual bicolor edges are in \(G^*\backslash T^* \cup \{e^*\}\).
-  Let \(C^*\) be the unique dual cycle in \(G^*\backslash T^* \cup \{e^*\}\).
-  To prove the proposition, we show that all dual bicolor edges are in \(C^*\) and all dual edges in \(C^*\) are bicolor.
+  Let \(R,B\) denote two subtrees get from removing \(e\) from \(T\) such that \(R\) contains red vertices and \(B\) contains blue vertices.
+  Let \(C\) be the edge cut between vertices of \(R\) and vertices of \(B\). All edges in \(C\) are bicolor and no edge in \(G\backslash C\) is bicolor.
 
-  Notice that \(C^*\) separates \(G^*\) into two components.
-  Let \(R^*,B^*\) be those two components in \(G^*\backslash C^*\) such that \(R^*\) contains the red dual face adjacent to the dual edge \(e^*\) and \(B^*\) contains the blud dual face adjacent to \(e^*\).
-
-  Because red vertices in \(G\) are all in one component of \(T\backslash e\), they are still connected in \(G\backslash C\).
-  So red dual faces in \(G^*\backslash C^*\) are also connected.
-  Similarly, we can see blue dual faces in \(G^*\backslash C^*\) are connected.
-
-  Since we know there is at least one red dual face in \(R^*\) and at least one blue dual face in \(B^*\), from the connectivity argument above, we can also infer that no red dual face is in \(B^*\) and no blue dual faces is in \(R^*\).
-  Plus the fact that every vertex is either red or blue, it is easy to see every dual face in \(R^*\) is red and every dual face in \(B^*\) is blue.
-
-
-  According to the way we define bicolor, all dual edges in \(R^*\) and \(B^*\) are not bicolor because every dual edge in \(R^*\) and \(B^*\) is shared by two dual faces with same color.
-  Moreover, every dual edge in \(C^*\) is shared by one dual face in \(R^*\) and one dual face in \(B^*\).
-  So we proved that no dual edge in \(G^*\backslash C^*\) is bicolor and all dual edges in \(C^*\) are bicolor.
-
+  We know the dual of an edge cut of \(G\) is a dual cycle in \(G^*\).
+  Let \(C^*\) be the dual cycle of \(C\) in \(G^*\).
   Every dual vertex in \(C^*\) is incident to exact two dual edges in \(C^*\), its corresponding primal face is incident to two bicolor edges. Every dual vertex in \(G^*\backslash C^*\) is incident no dual edge in \(C^*\), its corresponding primal face is incident to zero bicolor edge. The proposition is proved.
 
 
