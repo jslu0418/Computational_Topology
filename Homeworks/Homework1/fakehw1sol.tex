@@ -12,6 +12,7 @@
 \usepackage{xcolor}
 \usepackage{mdframed}
 \usepackage{arydshln}
+\usepackage{svg}
 
 % =========================================================
 %   Define common stuff for solution headers
@@ -19,7 +20,7 @@
 \Class{CS 7301.003}
 \Semester{Fall 2020}
 \Authors{2}
-\AuthorOne{Author A. One}{aao123456}
+\AuthorOne{Dongpeng Liu}{dxl200000}
 \AuthorTwo{Jiashuai Lu}{jxl173630}
 %\Section{}
 
@@ -49,6 +50,12 @@
   Since \(\Delta_{\psi}\) and \(\Delta_{\phi}\) are trigulations of the plane, every point of the plane is both in a unique triangle of \(\Delta_{\psi}\) and a unique triangle of \(\Delta_{\phi}\), and every triangle of \(\Delta\) overlaps with at least one triangle of \(\Delta_{\phi}\).
 
   For each triangle \(T\) of \(\Delta\), for every triangle \(T'\) of \(\Delta_{\phi}\) such that \(T\) and \(T'\) overlap, if the overlap of \(T\) and \(T'\) is not a line segment, it must be an \(n\)-gon where \(n\in\{3,4,5,6\}\), we add this \(n\)-gon to \(\Delta\) and create a frugal trigulation for this \(n\)-gon in \(\Delta\) if \(n>3\).
+
+\begin{figure}[h]
+  \centering
+  \includesvg{fig/triangle}
+  \caption{Possible n-gon by overlap.}
+\end{figure}
 
   It is not hard to see that now \(\Delta\) is also a triangulation of the plane. Let \(f|_{R}\) denote the restriction of function \(f\) to a region \(R\). Let \(T\) be any triangle of \(\Delta\).
   Then \(T\) is either whole or part of the overlap of some triangle \(T'\) of \(\Delta_{\psi}\) and a triangle \(T''\) of \(\Delta_{\phi}\).
