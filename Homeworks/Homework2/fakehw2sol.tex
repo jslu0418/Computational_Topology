@@ -34,27 +34,44 @@ Describe an algorithm to determine whether two given polygonal arcs \(\alpha\) a
 
 \begin{solution}\(\)\par
 
+  % \begin{algo}
+  %   \textul{\(\textsc{TestRelativeHomotopy}(\alpha, \beta, \mathscr{P})\):}\+
+  %   \\  Compute a frugal triangulation \(\Delta\) for \(R^2\backslash S\) where \(S\) are set of sentinels as \(P_1,\dots,P_h\).
+  %   \\  Let \(C_0\) be the set of edges in \(\Delta\) that has one end point at the outer boundary of \(R^2\backslash S\). Sort \(C_0\)
+  %   \\  in clockwise order w.r.t the sub-triangulation consists of all edges between \(S\).
+  %   \\  Let \(Y\) be the label sequence for edges in \(C_0\). Let \(Y^{-1}\) be its reversal.
+  %   \\
+  %   \\  Compute reduced crossing sequence \(X_\Delta(\alpha)\) and \(X_\Delta(\beta)\).
+  %   \\  While \(X_\Delta(\alpha)\) or \(X_\Delta(\beta)\) starts or ends with a substring \(X'\) of length \(|Y|\) s.t. \(X'\) is a substring of \(Y\cdot Y\) or
+  %   \\  \(Y^{-1}\cdot Y^{-1}\)\+
+  %   \\    Cut off \(X'\) from \(X_\Delta(\alpha)\) or \(X_\Delta(\beta)\).\-
+  %   \\  Let \(\alpha_0,\alpha_1\) and \(\beta_0,\beta_1\) be the start and end of \(\alpha\) and \(\beta\), respectively.
+  %   \\  Let \(\pi_c/\pi_{cc}\) be the path from \(\beta_0\) to \(\alpha_0\) through \(P_0\) clockwisely/counter-clockwisely.
+  %   \\  Let \(\delta_c/\delta_{cc}\) be the path from \(\alpha_1\) to \(\beta_1\) through \(P_0\) clockwisely/counter-clockwisely.
+  %   \\  Compute crossing sequences \(X_\Delta(\pi_c),X_\Delta(\pi_{cc}), X_\Delta(\delta_c), X_\Delta(\delta_{cc})\).
+  %   \\  for \(\pi \in {\pi_c,\pi_{cc}}\)\+
+  %   \\      for \(\delta\in {\delta_c,\delta_{cc}}\)\+
+  %   \\          if reduced sequence of \(X_\Delta(\pi)\cdot X_\Delta(\alpha)\cdot X_\Delta(\delta)\) equals to \(X_\Delta(\beta)\)\+
+  %   \\              Return \(\alpha\) and \(\beta\) are relative homotopy.\-\-\-
+  %   \\  Return \(\alpha\) and \(\beta\) are not relative homotopy.
+  % \end{algo}
+
   \begin{algo}
     \textul{\(\textsc{TestRelativeHomotopy}(\alpha, \beta, \mathscr{P})\):}\+
-    \\  Compute a frugal triangulation \(\Delta\) for \(R^2\backslash S\) where \(S\) are set of sentinels as \(P_1,\dots,P_h\).
-    \\  Let \(C_0\) be the set of edges in \(\Delta\) that has one end point at the outer boundary of \(R^2\backslash S\). Sort \(C_0\)
-    \\  in clockwise order w.r.t the sub-triangulation consists of all edges between \(S\).
-    \\  Let \(Y\) be the label sequence for edges in \(C_0\). Let \(Y^{-1}\) be its reversal.
-    \\
-    \\  Compute reduced crossing sequence \(X_\Delta(\alpha)\) and \(X_\Delta(\beta)\).
-    \\  While \(X_\Delta(\alpha)\) or \(X_\Delta(\beta)\) starts or ends with a substring \(X'\) of length \(|Y|\) s.t. \(X'\) is a substring of \(Y\cdot Y\) or
-    \\  \(Y^{-1}\cdot Y^{-1}\)\+
-    \\    Cut off \(X'\) from \(X_\Delta(\alpha)\) or \(X_\Delta(\beta)\).\-
-    \\  Let \(\alpha_0,\alpha_1\) and \(\beta_0,\beta_1\) be the start and end of \(\alpha\) and \(\beta\), respectively.
-    \\  Let \(\pi_c/\pi_{cc}\) be the path from \(\beta_0\) to \(\alpha_0\) through \(P_0\) clockwisely/counter-clockwisely.
-    \\  Let \(\delta_c/\delta_{cc}\) be the path from \(\alpha_1\) to \(\beta_1\) through \(P_0\) clockwisely/counter-clockwisely.
-    \\  Compute crossing sequences \(X_\Delta(\pi_c),X_\Delta(\pi_{cc}), X_\Delta(\delta_c), X_\Delta(\delta_{cc})\).
-    \\  for \(\pi \in {\pi_c,\pi_{cc}}\)\+
-    \\      for \(\delta\in {\delta_c,\delta_{cc}}\)\+
-    \\          if reduced sequence of \(X_\Delta(\pi)\cdot X_\Delta(\alpha)\cdot X_\Delta(\delta)\) equals to \(X_\Delta(\beta)\)\+
-    \\              Return \(\alpha\) and \(\beta\) are relative homotopy.\-\-\-
-    \\  Return \(\alpha\) and \(\beta\) are not relative homotopy.
+    \\  Compute a frugal triangulation \(\Delta\) for the convex hull of \(S\) where \(S\) are set of sentinels as \(P_1,\dots,P_h\).
+    \\  Compute crossing sequences \(X_\Delta(\alpha)\) and \(X_\Delta(\beta)\).
+    \\  If  \(X_\Delta(\alpha)= X_\Delta(\beta)\)\+
+    \\      Return \(\alpha\) and \(\beta\) are relative homotopic.\-
+    \\  Else\+
+    \\      Return \(\alpha\) and \(\beta\) are not relative homotopic.\-
   \end{algo}
+
+  Let \(\pi\) be any arc with endpoints \(u,v\) on \(P_0\), while a relative homotopy moves \(u\) or \(v\) along \(P_0\), the crossing sequence will not change because we are not allowed to cross any sentinel points during homotoping, since all chords in \(\Delta\) is between two sentinel points. Therefore, if \(\alpha\) is relative homotopy to \(\beta\), they should have same crossing sequence w.r.t. \(\Delta\).
+
+  On the other hand, we show if \(\alpha\) and \(\beta\) have same crossing sequence w.r.t. \(\Delta\), then they are relative homotopic. Let \(\Delta'\) be a frugal triangulation of \(R^2\backslash C\) and let \(\Delta^*=\Delta\cup \Delta\). We observe that, if two arcs with the same endpoints and the same crossing sequence w.r.t. \(\Delta\) are not path homotopic, the difference between reduced crossing sequences of them w.r.t. \(\Delta^*\) can only be induced by cycles around \(C\) based on endpoints of those arcs.
+
+  Let \(u=\alpha(0), v=\alpha(1), u'=\beta(0), v'=\beta(1)\). Let \(p_{u,u'},p_{v,v'}\) be paths from \(u\) to \(u'\) and \(v\) to \(v'\) along \(P_0\). We know that \(rev(p_{u,u'})\cdot \alpha\cdot p_{v,v'}\) is relative homotopic to \(\alpha\) and they have same crossing seqeuence w.r.t. \(\Delta\) and therefore now \(rev(p_{u,u'})\cdot \alpha\cdot p_{v,v'}\) has the same crossing sequence with \(\beta\) w.r.t. \(\Delta\). By concatenating \(rev(p_{u,u'})\cdot \alpha\cdot p_{v,v'}\) with some cycles \(c_{u'}, c_{v'}\) around convex hull \(C\) based on \(u'\) and \(v'\), we shall get an arc \(c_{u'}\cdot rev(p_{u,u'})\cdot \alpha\cdot p_{v,v'}\cdot c_{v'}\) that is relative homotopic to \(\alpha\) and path homotopic to \(\beta\), which implies that \(\alpha\) and \(\beta\) are relative homotopic.
+
 \end{solution}
 
 \HomeworkHeader{2}{2}% homework number, problem number
@@ -123,7 +140,7 @@ So we showed for some constants \(\Delta\ge 6, \Delta^*\ge 5\) and \(c\), we can
     Let \(S\) be the strong component of \(G\) where two endpoints of \(e\) lies in. Then we know \(S^*\) is acyclic from subproblem \((\mathrm{a})\).
     Let \(f^*,g^*\) be the tail and head of \(e^*\). Then there is no path from \(g^*\) to \(f^*\) in \(S^*\). So \(f^*\) and \(g^*\) not lie in the same strong component.
 
-    If the dual edge \(e^*\) is external, then \(f^*\) and \(g^*\) lie in different strong components of \(G^*\), and there exists no paths in \(G^*\) from \(g^*\) to \(f^*\). This implies that there exists a directed dual cut in \(G^*\) separate \(f^*, g^*\) into two partitions and \(e^*\) must be in this dual cut. Correspondingly, \(e\) is in a directed cycle dual to this directed cut in \(G\). Since a directed cycle itself is strong connected, two endpoints of edge \(e\) must be in the same strong component of \(G\). Thus, \(e\) is internal in \(G\).
+    If the dual edge \(e^*\) is external, then \(f^*\) and \(g^*\) lie in different strong components of \(G^*\), and there exists no paths in \(G^*\) from \(g^*\) to \(f^*\). This implies that there exists a directed dual cut in \(G^*\) separate \(f^*, g^*\) into two partitions and \(e^*\) must be in this dual cut. Correspondingly, \(e\) is in a directed cycle dual to this directed cut in \(G\). Since a directed cycle itself is strongly connected, two endpoints of edge \(e\) must be in the same strong component of \(G\). Thus, \(e\) is internal in \(G\).
 
   \end{solution}
 
