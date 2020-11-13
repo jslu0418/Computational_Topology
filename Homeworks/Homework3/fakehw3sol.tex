@@ -1,0 +1,160 @@
+% ---------
+%  Compile with "pdflatex hw1".
+% --------
+%!TEX TS-program = pdflatex
+%!TEX encoding = UTF-8 Unicode
+
+% Template borrowed from Jeff Erickson.
+
+\documentclass[11pt]{article}
+\usepackage{jeffe,handout,graphicx}
+\usepackage[utf8]{inputenc}		% Allow some non-ASCII Unicode in source
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{arydshln}
+\usepackage{svg}
+
+% =========================================================
+%   Define common stuff for solution headers
+% =========================================================
+\Class{CS 7301.003}
+\Semester{Fall 2020}
+\Authors{2}
+\AuthorOne{Dongpeng Liu}{dxl200000}
+\AuthorTwo{Jiashuai Lu}{jxl173630}
+%\Section{}
+\DeclareMathOperator{\corners}{corners}
+% =========================================================
+\begin{document}
+\HomeworkHeader{1}{1}% homework number, problem number
+% ---------------------------------------------------------
+\begin{enumerate}
+    \item
+      Let \(\Sigma\) be a combinatorial \(2\)-manifold, where each corner \(x\) of each face of
+      \(\Sigma\) is assigned a positive real number \(\angle x\), called the \EMPH{angle} at \(x\).
+      Let \(\corners(v)\) or \(\corners(f)\) denote the set of corners incident to a vertex \(v\) or
+      a face \(f\), respectively.
+      We define the \EMPH{curvature} of each vertex and face as follows:%
+      \footnote{The definitions use individual passes around a \emph{circle} as the unit of angular
+      measurements.}
+      \[ \kappa(v) := 1 - \sum_{x \in \corners(v)} \angle x \qquad\qquad \kappa(f) := 1 - \sum_{x
+      \in \corners(f)} (1/2 - \angle x).\]
+
+      Prove the \EMPH{combinatorial Gau\ss-Bonnet theorem}:
+      \[ \sum_{\text{vertex \(v\) of \(\Sigma\)}} \kappa(v) + \sum_{\text{face \(f\) of \(\Sigma\)}}
+        \kappa(f) = \chi(\Sigma). \]
+
+      \begin{solution}
+        Let \(V(\Sigma),E(\Sigma),F(\Sigma)\) denote the vertex, edge, and face sets of a \(2\)-manifold \(\Sigma\).
+
+        Observe that
+        \begin{align*}
+          \sum_{\text{vertex \(v\) of \(\Sigma\)}} \kappa(v) &=  \sum_{\text{vertex \(v\) of \(\Sigma\)}} (1-\sum_{x\in\corners(v)} \angle x)\\
+          &=|V(\Sigma)|-\sum_{\text{corner \(x\) of \(\Sigma\)}}\angle x
+        \end{align*}
+        and since every edge contributes to two faces, we have
+        \begin{align*}
+          \sum_{\text{face \(f\) of \(\Sigma\)}} \kappa(f) &= \sum_{\text{face \(f\) of \(\Sigma\)}}(1-\sum_{x\in\corners(f)}(1/2-\angle x))\\
+          &=|F(\Sigma)|-2|E(\Sigma)|/2+\sum_{\text{corner \(x\) of \(\Sigma\)}}\angle x
+        \end{align*}
+        together we get
+        \begin{align*}
+          \sum_{\text{vertex \(v\) of \(\Sigma\)}} \kappa(v) + \sum_{\text{face \(f\) of \(\Sigma\)}} \kappa(f)&=|V(\Sigma)|+|F(\Sigma)|-|E(\Sigma)|\\
+          &=\chi(\Sigma)
+        \end{align*}
+      \end{solution}
+
+  \item
+    Suppose every face of \(\Sigma\) is a triangle.
+    Prove the following special case of the combinatorial Gau\ss-Bonnet theorem:
+    \[ \sum_{\text{vertex \(v\) of \(\Sigma\)}}(6 - |\corners(v)|) = 6\chi(\Sigma). \]
+    \begin{solution}
+      While every face of \(\Sigma\) is a triangle, we know \(3|F(\Sigma)|=2|E(\Sigma)|\). And it is easy to see that,
+      \begin{align*}
+        \sum_{\text{vertex \(v\) of \(\Sigma\)}}(6 - |\corners(v)|) &= 6|V(\Sigma)| - \sum_{\text{vertex \(v\) of \(\Sigma\)}}|\corners(v)|\\
+                                                            &=6|V(\Sigma)|-2|E(\Sigma)|\\
+                                                            &=6|V(\Sigma)|-3|F(\Sigma)|\\
+                                                            &=6|V(\Sigma)|+6|F(\Sigma)|-9|F(\Sigma)|\\
+                                                            &=6|V(\Sigma)|+6|F(\Sigma)|-6|E(\Sigma)|\\
+                                                            &=6\chi(\Sigma)
+      \end{align*}
+    \end{solution}
+  \item
+    Now suppose \(\Sigma\) has boundary components.
+    Let \(\chi(v)\) denote the number of edges incident to \(v\), counting loops twice, minus the
+    number of corners incident to \(v\).
+    We now redefine the curvature of a vertex \(v\) as follows:
+    \[ \kappa(v) := 1 - \frac{\chi(v)}{2} - \sum_{x \in \corners(v)} \angle x. \]
+
+    Prove that the combinatorial Gau\ss-Bonnet theorem holds in this more general setting.
+    \begin{solution}
+      Let \(|E(v)|\) denote the number of edges incident to \(v\), counting loops twice. Then we get
+      \begin{align*}
+        \sum_{\text{vertex \(v\) of \(\Sigma\)}} \kappa(v) &= |V(\Sigma)|-\sum_{\text{vertex \(v\) of \(\Sigma\)}}\frac{\chi(v)}{2}-\sum_{\text{corner \(x\) of \(\Sigma\)}}\angle x\\
+                                              &=|V(\Sigma)|-\sum_{\text{vertex \(v\) of \(\Sigma\)}}\frac{|E(v)|-|\corners(v)|}{2}-        \sum_{\text{corner \(x\) of \(\Sigma\)}}\angle x
+      \end{align*}
+      combining this with the result in question 1.1, we have,
+      \begin{align*}
+        &\sum_{\text{vertex \(v\) of \(\Sigma\)}} \kappa(v) + \sum_{\text{face \(f\) of \(\Sigma\)}} \kappa(f)\\
+        &=|V(\Sigma)|-\sum_{\text{vertex \(v\) of \(\Sigma\)}}\frac{|E(v)|-|\corners(v)|}{2}-\sum_{\text{corner \(x\) of \(\Sigma\)}}\angle x + |F(\Sigma)|\\
+        &-\sum_{\text{face \(v\) of \(\Sigma\)}}\frac{|\corners(f)|}{2}+\sum_{\text{corner \(x\) of \(\Sigma\)}}\angle x\\
+        &=|V(\Sigma)|+|F(\Sigma)|-\sum_{\text{vertex \(v\) of \(\Sigma\)}}\frac{|E(v)|}{2}\\
+        &=|V(\Sigma)|+|F(\Sigma)|-|E(\Sigma)|=\chi(\Sigma)
+      \end{align*}
+      The second equation is from
+      \(\sum_{\text{face \(v\) of \(\Sigma\)}}|\corners(f)|=\sum_{\text{vertex \(v\) of \(\Sigma\)}}|\corners(v)|\), and the fact that every edge contributes to the number of incident edges for two vertices implies the last equation.
+
+\end{solution}
+\item
+    Suppose the surface \(\Sigma'\) is homeomorphic to a disk, and every face and \emph{interior}
+    vertex of \(\Sigma'\) has curvature at most \(0\).
+    Prove that at least three boundary vertices of \(\Sigma'\) have strictly positive curvature.
+    \begin{solution}
+      We know \(\chi(\Sigma')=1\), therefore we have
+      \[\sum_{\text{vertex \(v\) of \(\Sigma'\)}} \kappa(v) + \sum_{\text{face \(f\) of \(\Sigma'\)}} \kappa(f)=1\]
+      Let \(V_B\) be the set of boundary vertices of \(\Sigma'\).
+      Then we get
+      \[\sum_{v\in V_B} \kappa(v) + \sum_{v\in V(\Sigma')-V_B}\kappa(v)+\sum_{f\in F(\Sigma')} \kappa(f)=1\]
+      We know \(\kappa(v)\le 0, \forall v\in V(\Sigma')-V_B\) and \(\kappa(f)\le 0, \forall f\in F(\Sigma')\). So \(\sum_{v\in V_B} \kappa(v)\ge 1\). From the definition of curvature of vertex \(v\) in question 1.3, we know if \(v\in V_B\),
+      \begin{align*}
+        \kappa(v)&=1-\frac{|E(v)|-|\corners(v)|}{2}-\sum_{x \in \corners(v)} \angle x\\
+            &=1-\frac{1}{2}-\sum_{x \in \corners(v)} \angle x\\
+            &=\frac{1}{2}-\sum_{x \in \corners(v)} \angle x
+      \end{align*}
+      where the second equation is from the number of edges incident to a boundary vertex is one more than the number of corners incident to the vertex.
+      Since the angle of every corner is positive. Every boundary vertex has curvature strictly less than \(1/2\). Therefore, to make \(\sum_{v\in V_B} \kappa(v)\ge 1\), we need at least \(\floor{\frac{1}{1/2}}+1=3\) boundary vertices has positve curvature.
+    \end{solution}
+\end{enumerate}
+\HomeworkHeader{3}{2}
+  Let \(G\) be a cellularly embedded (i.e. every face is a disk) graph on a surface \(\Sigma\)
+  \emph{with boundary}.
+  Recall, a \EMPH{cut graph} is a subgraph \(H\) of \(G\) such that the closure of \(\Sigma
+  \setminus H\) is a disk.
+  A cut graph is minimal if no proper subgraph is a cut graph.
+  For example, a minimal cut graph of an annulus is a path from one boundary to the other.
+
+  A \EMPH{pair of pants} is a sphere minus three open disks.
+  Let \(G\) be a graph with non-negatively weighted edges, cellulary embedded in a pair of pants
+  \(\Sigma\).
+  Describe an algorithm to find the minimum-length cut graph in \(G\) in \(O(n \log n)\) time.
+  \emph{[Hint: What does a minimal cut graph of a pair of pants look like?]}
+  \begin{solution}
+    Let \(D\) denote the set of three open disks minus from the sphere.
+\begin{algo}
+    \textul{\(\textsc{Minimum-Length Cut Graph }(G, D)\):}\+
+    \\  For every disk \(d\in D\)\+
+    \\  Let \(d_1, d_2\) be two disks in \(D\backslash\{d\}\).
+    \\  Compute a minimum-length path \(\sigma_{u,v}\) for every pair of points \(u,v, u\in d_1, v\in d_2\).
+    \\  Let \(\sigma_{min_1}\) be the minimum-length path among all paths computed from the step above.
+    \\  Compute a minimum-length path \(\sigma_{u,v}\) for every pair of points \(u,v, u\in \sigma_{min_1}\cup d_1\cup d_2, v\in d\).
+    \\  Let \(\sigma_{min_2}\) be the minimum-length path among all paths computed from the step above.
+    \\  Let \(H\) be the minimum-length cut-graph computed in this iteration\-
+    \\  Return the cut-graph with minimum-length among the cut-graphs we get in three iterations.\-
+\end{algo}
+\end{solution}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
