@@ -26,7 +26,7 @@
 \DeclareMathOperator{\corners}{corners}
 % =========================================================
 \begin{document}
-\HomeworkHeader{1}{1}% homework number, problem number
+\HomeworkHeader{3}{1}% homework number, problem number
 % ---------------------------------------------------------
 \begin{enumerate}
     \item
@@ -140,17 +140,20 @@
   \emph{[Hint: What does a minimal cut graph of a pair of pants look like?]}
   \begin{solution}
     Let \(D\) denote the set of three open disks minus from the sphere.
+    We know the cut graph will connect three boundary components. Therefore, it contains at least one boundary vertex for each boundary component. We basically want to find a minimum weight tree connecting three boundary components. So we can fix any disk \(d\in D\), then every time guess a vertex \(v\) on \(d\) and compute a minimum cut graph containing \(v\), and choose the minimum weight cut graph among those choices.
 \begin{algo}
-    \textul{\(\textsc{Minimum-Length Cut Graph }(G, D)\):}\+
-    \\  For every disk \(d\in D\)\+
-    \\  Let \(d_1, d_2\) be two disks in \(D\backslash\{d\}\).
-    \\  Compute a minimum-length path \(\sigma_{u,v}\) for every pair of points \(u,v, u\in d_1, v\in d_2\).
-    \\  Let \(\sigma_{min_1}\) be the minimum-length path among all paths computed from the step above.
-    \\  Compute a minimum-length path \(\sigma_{u,v}\) for every pair of points \(u,v, u\in \sigma_{min_1}\cup d_1\cup d_2, v\in d\).
-    \\  Let \(\sigma_{min_2}\) be the minimum-length path among all paths computed from the step above.
-    \\  Let \(H\) be the minimum-length cut-graph computed in this iteration\-
-    \\  Return the cut-graph with minimum-length among the cut-graphs we get in three iterations.\-
+  \textul{\(\textsc{Minimum-Length Cut Graph }(G, D)\):}\+
+  \\  Pick any disk \(d\in D\), let \(d_1,d_2\) be another two disks in \(D-\{d\}\)
+  \\  Run MSSP for \(d\) as the source face.\+
+  \\  During MSSP, every time when we pivot an edge, suppose current source is \(s_i\),\+
+  \\  we update the shortest path \(p_{i1},p_{i2}\) from current source to \(d_1\) and \(d_2\).\-\-
+  \\  Let \(s_k=\mathrm{Argmin}_{\text{\(s_i\) on \(d\)}}\text{sum weight of }p_{i1}\cup p_{i2}\)
+  \\  Return the actual graph of \(p_{k1}\cup p_{k2}\)\-
 \end{algo}
+MSSP costs \(O(n\log{n})\), during the MSSP, when we update the shortest paths \(p_{i1},p_{i2}\), we only maintain the tail of the paths and the sum weight of the paths. So we did not increase the running time asymptotically.
+
+After we know the pair of two endpoints of \(p_{k1}\) and \(p_{k2}\), we can use at most \(O(n\log{n})\) time to know the actual paths (we can afford to run MSSP again). Then we compute the union of them in \(O(n)\) time. So the total running time is \(O(n\log{n})\).
+
 \end{solution}
 \end{document}
 
