@@ -152,7 +152,7 @@
 \end{algo}
 MSSP costs \(O(n\log{n})\), during the MSSP, when we update the shortest paths \(p_{i1},p_{i2}\), we only maintain the tail of the paths and the sum weight of the paths. So we did not increase the running time asymptotically.
 
-After we know the pair of two endpoints of \(p_{k1}\) and \(p_{k2}\), we can use at most \(O(n\log{n})\) time to know the actual paths (we can afford to run MSSP again). Then we compute the union of them in \(O(n)\) time. So the total running time is \(O(n\log{n})\).
+After we know the pair of two endpoints of \(p_{k1}\) and \(p_{k2}\), we can use at most \(O(n)\) time to know the actual paths (we can afford to run twice of Henzinger \textit{et al.}'s algorithm). Then we compute the union of them in \(O(n)\) time. So the total running time is \(O(n\log{n})\).
 
 \end{solution}
 \end{document}
