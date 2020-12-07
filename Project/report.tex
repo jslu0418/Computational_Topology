@@ -1,0 +1,89 @@
+\documentclass[12pt,twoside]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage{CClicenses}
+\usepackage{jeffe}
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+
+%% Used for PgfPlots example, shown in the "Figures" section below.
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+
+\usepackage{cite}
+\usepackage{cleveref}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage{amsopn}
+\usepackage{verbatim}
+\usepackage{mathtools}
+
+%------------------------------------------
+% line numbers
+%------------------------------------------
+\usepackage[mathlines]{lineno}
+%pagewise
+%\linenumbers
+\renewcommand\linenumberfont{\normalfont\tiny\sffamily\color{Gray}}
+\setlength\linenumbersep{2em}
+
+\DeclareMathOperator{\Range}{Range}
+\DeclareMathOperator{\Lg}{lg}
+\DeclareMathOperator{\Argmin}{argmin}
+\DeclareMathOperator{\Argmax}{argmax}
+\DeclareMathOperator{\Poly}{\poly}
+\DeclareMathOperator{\Polylog}{\polylog}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\probability}{\mathbb{P}}
+
+\def\distG{\dist_{G^*}}
+\def\eps{\varepsilon}
+\def\cost{\textsc{Cost}}
+\def\spread{\textsc{Sp}}
+\def\dartof#1{\vec{#1}}
+\def\dartsof#1{\dartof{#1}}
+\def\event{e}
+\def\R{\mathbb{R}}
+
+%% ------------------------------------------------------------------
+%% End of macros for in-document examples.
+%% ------------------------------------------------------------------
+
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{observation}[lemma]{Observation}
+\newtheorem{claim}[lemma]{Claim}
+\newtheorem{definition}[lemma]{Definition}
+\newtheorem{example}[lemma]{Example}
+
+% \theoremstyle{plain}
+
+\begin{document}
+\title{Title Placeholder}
+
+\author{
+Dongpeng Liu%
+and Jiashuai Lu%
+}
+
+%\DRAFT
+
+\maketitle
+
+%
+\begin{abstract}
+Abstract placeholder
+\end{abstract}
+
+\setcounter{page}{0}
+%\thispagestyle{empty}
+
+\section{Introduction}\label{sec:intro}
+\input{sec-intro.tex}
+
+\section{Navigational Complexity of a Topological Space}\label{sec:complexity}
+\input{sec-complexity.tex}
+
+\bibliography{ref}
+\bibliographystyle{plain}
+\end{document}

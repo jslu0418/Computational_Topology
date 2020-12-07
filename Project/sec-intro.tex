@@ -1,0 +1,14 @@
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "report"
+%%% End:
+
+At every moment, we are making plans of our actions for the very next instant.
+Planning is involved in everywhere in our daily life, for example, which route we use to get to work, how to make a drone able to get back safely by itself.
+Motion planning, is a problem that given a start position \(s\) of a object \(X\) and a goal position \(t\), possibly with a set of obstacles, computes a path that moves \(X\) from \(s\) to \(t\) without colliding with any obstacle.
+It is also know as the piano mover's problem.
+Imagine that we are given a computer-aided design (CAD) model of a house and a piano, and the goal is determine a way to move the piano from one room to another in the house without hitting anything~\cite{lavalle2006planning}.
+This problem has many applications in robotics, computational geometry, computer games, etc. Especitally in the progress of autonomous robotics, it makes a critial role in the problem of enable the robotics to make decision for their own actions based on different cases~\cite{eric98}.
+
+While there are multiple versions of this problem according to how the obstacle information is given, researchers usually focus on the most simple version that all description of obstacles are given and fixed through the planning.
+The problem in this setting is often referred as the basic motion planning problem, and it is usually solved by first building a graph to model the geometric structure of the environment and then finding a connected component that contains both the start and target positions. There are three common approaches to solve this basic setting problem: the roadmap approach, the cell decomposition approach, and the potential field approach~\cite{eric98}. The first two of them are both using the concept of \textit{configuration space}, \textit{free space} and the goal is finding a \textit{free path} where the configuration space is a transformation from the realistic space of the robot of certain shape and size into a space that the robot is shrinked to a point.

@@ -1,0 +1,199 @@
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "report"
+%%% End:
+In this section, we first introduce a formal definition of the motion planning problem. Then we will give the topological representation of the problem. After that, we are able to start discussing about a homotopy invariant of a path-connected topological space, which is proposed by Farber in 2003~\cite{DBLP:journals/dcg/Farber03}.
+
+\subsection{Configuration Spaces of Motion Planning}
+The word \textit{robot} was first invented by the Czech writer Karel\u{a}pek in his play R.U.R. (Rossum's Universal Robots)~\cite{zunt2002did}. But the concept of automata, can be found in many ancient mythologies. Autonomous robots, which should be able to complete many tasks without any human's control or assistance, is an essential objective of modern robotics research.
+
+In the motion planning problem, we use \textit{configuration} to describe the object's position and possible direction(all geometric characteristics of the object).
+The \textit{configuration space} is often referred to all possible configurations(states).
+Typically, every configuration \(A\) consists of a finite set of real numbers, and we can see the configuration space \(X\) as a subset of the Euclidean space of which the dimension is the number of values we used to encode one state of the object.
+In this setting, every point in this subset represents a state of the object.
+Then we can naturally relate Topology and motion planning through the configuration space \(X\).
+Given the configuration space \(X\) of a motion planning system, we may solve the problem by only looking at \(X\)'s topology properties, possibly with some necessary geometric features.
+
+\begin{example}[Piano movers' problem~\cite{schwartz1983piano,DBLP:journals/dcg/Farber03}]
+  We look at a simple version of the piano movers' problem here.
+  As Figure~\ref{fig:piano} shows, the black piano shape can only move horizontally and the rectangles are obstacles.
+  Let the four piano shapes be four different states of the piano.
+  The problem is how to move the piano from one state to another one without colliding any obstacle.
+  \begin{figure}
+    \begin{center}
+      \includegraphics[width=0.5\textwidth]{fig-piano}
+    \end{center}
+    \caption{An example of piano mover's problem}
+    \label{fig:piano}
+  \end{figure}
+\end{example}
+In this case, every unique state of the piano can be described by three variables, two for the coordinates of the center of the piano and another one for denoting the direction.
+Therefore, the configuration space of it is a subset set of \(\R^3\).
+
+Schwartz and Sharir also give an algebraic formulation for the general version of ``Piano'' mover's problem.
+In this setting, we are considering collision-free states of some hinged object \(B\), where \(B\) can be decomposed to a finite number of rigid compact subparts \(B_1,B_2,\dots,\).
+Every rigit subpart is bounded by a number of algebraic surfaces.
+Any two subparts \(B_1, B_2\) can be connected together by any one of following ways:
+\begin{enumerate}[label=\arabic*)]
+\item \(B_1\) and \(B_2\) are partially overlapping such that \(B_1\) and \(B_2\) are combined by a unique point in the overlapping part.
+\item \(B_1\) and \(B_2\) are connected by a hinge between two points \(a_1, a_2\) where \(a_1\in B_1, a_2\in B_2\). In this case, \(B_2\) can revolve around some axis \(X\) fixed in the frame of \(B_1\).
+\item \(B_2\) can slide and rotate along some axis \(X\) fixed in the frame of \(B_1\).
+\end{enumerate}
+
+To formulate the problem algebraically, they first describe a superspace of the set of all valid states of the hinged object \(B\).
+The rotation group is a smooth \(3\)-dimensional algebraic submanifold of the \(9\)-dimensional Euclidean space of \(3\times 3\) real matrices.
+Recall that an algebraic manifold is a smooth algebraic variety.
+If \(B\) itself is minimal, i.e., \(B\) is a rigit compact subpart. Then its state can be represented by an Euclidean motion \(T\) from some base state to the given state.
+The transformation \(Ts=Rs+s_0\) is defined by a pair \((s_0, R)\) where \(s_0\) is a point in \(\R^3\) and \(R\) is a rotation matrix described above.
+So the transformation can be seen as a point in a smooth \(6\)-dimensional algebraic submanifold of \(\R^{12}\).
+
+Otherwise, \(B\) consists of multiple parts throught different ways listed earlier. One could find that in all cases, the overall states of all parts can be represented as a point in a smooth algebraic manifold in a Euclidean space of some dimension. For more details including a general path-finding algorithm runs in time exponential in the number of degrees of freedom of the object, we refer to ~\cite{schwartz1983piano}.
+
+\begin{example}[The robot arm~\cite{latombe2012robot,DBLP:journals/dcg/Farber03}]
+  In 1991, Latombe described a general robot arm problem. An arm is constituted by connecting a couple of bars through revolving joins as Figure~\ref{fig:arm} shows.
+  \begin{figure}
+    \begin{center}
+      \includegraphics[width=0.5\textwidth]{fig-arm}
+    \end{center}
+    \caption{An example of the robot arm problem}
+    \label{fig:arm}
+  \end{figure}
+\end{example}
+Assume bars of the arm can have self-intersections. If the arm is in 2-dimensional plane, fix any \(v_i\), the configuration space of \(v_{i+1}\) is \(S^1\). Therefore, the whole configuration space \(X\) is:
+\[\underbrace{S^1\times S^1\times\dots\times S^1}_{\text{\# of bars}}\]
+Similarly, in 3-dimensional space, the configuration space \(X\) is:
+\[\underbrace{S^2\times S^2\times\dots\times S^2}_{\text{\# of bars}}\]
+
+\subsubsection{General Configuration Spaces}
+Let \(A\) be a topological space and \(Q_m=\{q_i|1\le i\le m, q_i\in A\}\) be a subset of points in \(A\) representing obstacles.
+Let \(B=A-Q_m\) and let \(X=F(A,m,n)\) denote some subset of \(\underbrace{B\times B\times\dots\times B}_{n}\) such that
+for every element \(E=(e_1,e_2,\dots,e_n)\) in \(X\), every \(e_i\) of \(E\) has a unique value in \(B\).
+Then \(F(A,m,n)\) is the collision-free configuration space of a system of \(n\) points moving in space \(A\).
+% Fadell and Neuwirth gave the configuration spaces \(F(\R^m,n)\) which is a special case of \(A=\R^m\) is \(m\)-dimensional Euclidean space (or an arbitrary manifold)~\cite{fadell1962configuration}.
+When \(G\) is a connected graph, the configuration spaces \(F(G,m,n)\) are studied usually in robotics.
+
+\subsubsection{Topology of Configuration Spaces of Polygonal Linkages}
+In general, a linkage is a graph with fixed edge lengths. Figure~\ref{fig:linkage1} shows some linkages of various types. Let \(L\) be any graph with given edge lengths. A \textit{configuration} of \(L\) is a geometric realization of \(L\) in Euclidean space.
+A \textit{reconfiguration} is a continuous sequence of such configurations (see ~\ref{fig:reconfig} for example).
+The configuration space \(X\) consists of all configurations and paths corresponding to reconfigurations~\cite{connelly2004geometry}.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{fig-linkage1}
+  \caption{Examples of different type linkages~\cite{connelly2004geometry}}
+  \label{fig:linkage1}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{fig-reconfig}
+  \caption{An example of reconfiguration of a linkage}
+  \label{fig:reconfig}
+\end{figure}
+
+There are a lot of results in studies on algebraic topological invariants of this configuration space.
+Here we study the topology of the configuration space of linkage of cycle, which are important manifolds representing shapes of closed polygonal chains.
+
+Let \(\mathbf{a}\) be any vector in \(\R^m_{+}\), where \(\mathbf{a}=(a_1,a_2,\dots,a_m)\) consists of \(m\) positive real numbers. Then we define the variety \(M(a)\) as:
+\[M(\mathbf{a})=\{(z_1,z_2,\dots,z_m);z_i\in S^2, \sum^m_{i=1}a_iz_i=0\}/SO^3\]
+
+Here \(SO^3\) performs as diagonal of the product \(\underbrace{S^2\times \dots \times S^2}_{n}\), and \(M(\mathbf{a})\) describes the variety of all closed polygonal shapes in \(3\)-dimensional space where the side lengths are defined by \(\mathbf{a}\). As an example, Figure~\ref{fig:reconfig} shows two different shapes with different coefficients \((z_1,z_2,\dots,z_m)\) as the orientations of edges with same edge lengths.
+
+Given the above definition of the variety of polygonal linkage, intuitively, we have the following lemma from the triangle inequality.
+\begin{lemma}\label{lm:nonempty}
+  Let \(||\mathbf{a}||=\sum^m_{i=1}a_i\). \(M(\mathbf{a})\) is nonempty if and only if \(a_i<||\mathbf{a}||\) for \(1\le i\le m\).
+\end{lemma}
+
+We say a vector \(\mathbf{a}\in \R^m_+\) is \textit{generic} if \(M(\mathbf{a})\) does not include an element \(\mathbf{z}=(z_1,z_2,\dots,z_m)\) such that \(z_i=\pm{1}\) for all \(i\).
+
+\begin{lemma}
+If \(\mathbf{a}\) is generic, then \(M(a)\) is a closed smooth manifold of dimension \(2(m-3)\)~\cite{DBLP:journals/dcg/Farber03}.
+\end{lemma}
+
+To learn the relation between the variety of \(\mathbf{a}\) and \(\mathbf{a}\), we need first define the \textit{short} subset of \(\{1,2,\dots,m\}\).
+We say a subset \(V\subseteq \{1,2,\dots,m\}\) if such that \(\sum_{i\in V}a_i\le \sum_{j\notin V}a_j\).
+From Lemma~\ref{lm:nonempty} we know every subset \(V\) contains only a singleton is short subset.
+Let \(S(\mathbf{a})\) denote all short subsets corresponding to \(\mathbf{a}\). Note that \(S(\mathbf{a})\) is partially ordered set which is determined by its maximal elements.
+
+Hausmann and Knutson proved the following lemma of a property of the variety and short subsets in 1998.
+\begin{lemma}
+If two vectors \(\mathbf{a}, \mathbf{a}'\in \R^m_+\) are generic, and there is an isomorphism between \(S(\mathbf{a})\) and \(S(\mathbf{a}')\), then \(M(\mathbf{a}\) and \(M(\mathbf{a}'\) are diffeomorphic.
+\end{lemma}
+
+Recall that two smooth manifolds \(X, Y\) are diffeomorphic if there is a bijective and differentiable map \(f:X\to Y\) and \(f^{-1}\) is differentiable.
+
+There are also some universality theorems focusing on the topological properties of the configuration spaces of linkages.
+
+\begin{theorem}[Jordan and Steiner '98~\cite{jordan1999configuration}]
+  Any compact real algebraic variety \(V\subset \R^n\) is homeomorphic to the union of components of the configuration space of a mechanical linkage.
+\end{theorem}
+
+\begin{theorem}[Kapovich and Millson '02~\cite{kapovich2002universality}]
+  For any smooth compact manifold \(X\), there is a linkage \(L\) of which the moduli space is diffeomorphic to a disjoint union of a number of copies of \(X\).
+\end{theorem}
+Recall that the moduli space is the solutions of a geometric problem.
+
+\subsection{Navigational Complexity of the Motion Planning Problem}
+Farber explored the topological properties of the robot motion planning problem and showed that there is a homotopy invairant quantity of configuration spaces \(X\) called the \textit{navigational complexity} \(TC(X)\)~\cite{farber2003topological,farber2004instabilities}.
+This invariant  explains how knowing the cohomology algebra of
+configuration space of a robot one may predict instabilities of its behavior.
+
+Let \(X\) denote the configuration space of a mechanical system \(S\)
+Then we can use a continious path \(\gamma:[0,1]\to X\) to represent a sequence of continuous motions of \(S\) where \(\gamma(0),\gamma(1)\) are the initial and final states of the system, respectively.
+
+If \(X\) is path-connected, it is easy to see that one may move the system between any two states.
+Let \(PX\) denote the space of all these continuous paths.
+Let \(\pi:PX\to X\times X\) be the map from path to initial-final states configuration.
+Then \(\pi\) is a Serre fibration.
+
+On the other hand, a motion planning algorithm is a function \(s:X\times X\to PX\), and \(s\) is a section of \(\pi\).
+
+Now we are going to learn the continuity of motion planning algorithms.
+We say a motion planning algorithm \(s\) is continuous if solutions \(s(A,B)\) for all \(A,B\in X\times X\) continously depend on initial-final states \(A\) and \(B\).
+
+\begin{lemma}[Farber '03~\cite{farber2003topological}]
+There exists a continuous motion planning algorithm for a configuration space \(X\) if and only if \(X\) is contractible.
+\end{lemma}
+In practice, most of planning problems involves noncontractible configuration spaces.
+So we want to learn more about the \(discontinuities\).
+Farber proposed an invariant \(\mathbf{TC}(X)\) to measure the complexity the planning problem in space \(X\).
+Besides this, they also described four different ways in which \(\mathbf{TC}(X)\) affects the structure of motion planning algorithms for \(X\).
+To describe those, we first use four distinct notions of navigational complexity of topological spaces: \(\mathbf{TC}_j(X), j=1,2,3,4\).
+
+\subsubsection{Tame Motion Planning Algorithms}
+A topological space \(X\) is called an \textit{Euclidean Neighbourhood Retract} if it can be embedded into an Euclidean space \(\R^k\) such that for some open neighbourhood \(U, X\subset U\subset \R^k\), there exists a retraction \(r:U\to X,r|_X=\mathbf{1}_X\)~\cite{farber2004instabilities}.
+\begin{definition}\label{def:tame}
+  A motion planning algorithm \(s:X\times X\to PX\) is called tame if \(X\times X=\Union_{1\le i\le k} P_i\) for some finited number \(k\) such that
+  \begin{enumerate}[label=\arabic*)]
+  \item \(s|_{P_i}:P_i\to PX, 1\le i\le k\) is continuous.
+  \item All \(P_i\) are disjoint with each other.
+  \item Every \(P_i\) is an ENR
+  \end{enumerate}
+\end{definition}
+
+In practice, all motion planning algorithms are tame and the function \(s\) restrict to any \(P_i\) is usually real algebraic and continuous.
+
+\begin{definition}
+  The topological complexity of a tame motion planning algorithm \(s\) is the minimal number of domains of continuity \(k\) in a representation of \(s\) in definition~\ref{def:tame}~\cite{DBLP:journals/dcg/Farber03}.
+\end{definition}
+
+\begin{definition}
+  The topological complexity \(\mathbf{TC}_1(X)\) of a path-connected topological space \(X\) is the minimal topological complexity of motion planning algorithms of \(X\)~\cite{DBLP:journals/dcg/Farber03}.
+\end{definition}
+
+Observe that \(\mathbf{TC}_1(X)=1\) if and only if \(X\) is a contractible Euclidean Neighbourhood Retract.
+If there is no tame motion planning algorithm for \(X\), \(\mathbf{TC}_1(X)=\infty\).
+
+\note{The words below have not been paraphrased}
+Let p: E  B be a fibration. Its Schwartz genus is defined as the minimal number
+k such that there exists an open cover of the base B = U1 U2 Uk with the
+property that over each set Uj B there exists a continuous section sj
+ Uj E
+of E B. This notion was introduced by A. S. Schwarz in 1958. In 1987
+1988 S. Smale and V. A. Vassiliev applied the notion of Schwarz genus to study
+complexity of algorithms of solving polynomial equations.
+
+The genus of a fibration equals 1 if and only if it admits a continuous section.
+The genus of the Serre fibration P0X X coincides with the Lusternik
+Schnirelmann category cat(X) of X, see Cornea et al. (2003). Here P0(X) is the
+space of paths in X which start at the base point x0 X. For the motion planning
+problem we need to study a different fibration  pi PX X X.
