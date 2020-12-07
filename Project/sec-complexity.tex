@@ -159,10 +159,9 @@ Farber proposed an invariant \(\mathbf{TC}(X)\) to measure the complexity the pl
 Besides this, they also described four different ways in which \(\mathbf{TC}(X)\) affects the structure of motion planning algorithms for \(X\).
 To describe those, we first use four distinct notions of navigational complexity of topological spaces: \(\mathbf{TC}_j(X), j=1,2,3,4\).
 
-\subsubsection{Tame Motion Planning Algorithms}
 A topological space \(X\) is called an \textit{Euclidean Neighbourhood Retract} if it can be embedded into an Euclidean space \(\R^k\) such that for some open neighbourhood \(U, X\subset U\subset \R^k\), there exists a retraction \(r:U\to X,r|_X=\mathbf{1}_X\)~\cite{farber2004instabilities}.
 \begin{definition}\label{def:tame}
-  A motion planning algorithm \(s:X\times X\to PX\) is called tame if \(X\times X=\Union_{1\le i\le k} P_i\) for some finited number \(k\) such that
+  A motion planning algorithm \(s:X\times X\to PX\) is called \emph{tame} if \(X\times X=\Union_{1\le i\le k} P_i\) for some finited number \(k\) such that
   \begin{enumerate}[label=\arabic*)]
   \item \(s|_{P_i}:P_i\to PX, 1\le i\le k\) is continuous.
   \item All \(P_i\) are disjoint with each other.
@@ -173,27 +172,48 @@ A topological space \(X\) is called an \textit{Euclidean Neighbourhood Retract} 
 In practice, all motion planning algorithms are tame and the function \(s\) restrict to any \(P_i\) is usually real algebraic and continuous.
 
 \begin{definition}
-  The topological complexity of a tame motion planning algorithm \(s\) is the minimal number of domains of continuity \(k\) in a representation of \(s\) in definition~\ref{def:tame}~\cite{DBLP:journals/dcg/Farber03}.
+  The topological complexity of a tame motion planning algorithm \(s\) is the minimal number of domains of continuity \(k\) in a representation of \(s\) in definition~\ref{def:tame}~\cite{farber2006topology}.
 \end{definition}
 
 \begin{definition}
-  The topological complexity \(\mathbf{TC}_1(X)\) of a path-connected topological space \(X\) is the minimal topological complexity of motion planning algorithms of \(X\)~\cite{DBLP:journals/dcg/Farber03}.
+  The topological complexity \(\mathbf{TC}_1(X)\) of a path-connected topological space \(X\) is the minimal topological complexity of motion planning algorithms of \(X\)~\cite{farber2006topology}.
 \end{definition}
 
 Observe that \(\mathbf{TC}_1(X)=1\) if and only if \(X\) is a contractible Euclidean Neighbourhood Retract.
 If there is no tame motion planning algorithm for \(X\), \(\mathbf{TC}_1(X)=\infty\).
 
-\note{The words below have not been paraphrased}
-Let p: E  B be a fibration. Its Schwartz genus is defined as the minimal number
-k such that there exists an open cover of the base B = U1 U2 Uk with the
-property that over each set Uj B there exists a continuous section sj
- Uj E
-of E B. This notion was introduced by A. S. Schwarz in 1958. In 1987
-1988 S. Smale and V. A. Vassiliev applied the notion of Schwarz genus to study
-complexity of algorithms of solving polynomial equations.
+Before we introduce the second notion of the topological complexity of topological spaces, we need first introduce the Schwarz genus.
+Let \(\pi: X\to B\) be a fibration. Let \(k\) be a number such that there is an open cover of the base \(B=\Union_{1\le i\le k} S_i\) of which for each set \(S_i\), there is a continuous section \(s_i:U_i\to X\) of \(\pi\).
+The Schwarz genus is defined as the minimum \(k\) satisfies this condition by Schwarz in 1958~\cite{schwarz1962genus}.
 
-The genus of a fibration equals 1 if and only if it admits a continuous section.
-The genus of the Serre fibration P0X X coincides with the Lusternik
-Schnirelmann category cat(X) of X, see Cornea et al. (2003). Here P0(X) is the
-space of paths in X which start at the base point x0 X. For the motion planning
-problem we need to study a different fibration  pi PX X X.
+\begin{definition}
+  Let \(X\) be any path-connected topological space. The topological complexity \(\mathbf{TC}_2(X)\) is the Schwarz genus of the fibration~\cite{farber2006topology}
+  \[\pi:PX\to X\times X\]
+\end{definition}
+
+Let \(\cat(X)\) denote the Lusternik-Schnirelmann category of \(X\)~\cite{cornea2003lusternik}, then
+\[\cat(X)\le \mathbf{TC}_2(X)\le \cat(X\times X)\]
+
+The third notion of the topological complexity relates to the \emph{order of instability} of motion planning algorithms introduced by \(Farber\) in 2004. For more details, see ~\cite{farber2004instabilities}.
+The order of instability is a fundamental feature of a motion planning algorithm.
+Formally, it is defined as the maximum value \(r\le k\) such that for any \(\epsilon>0\) we can find \(r\) pairs of initial-final configurations \((A_1,B_1),(A_2,B_2),\dots,(A_r,B_r)\) in where the distance between any two pairs is less than \(\epsilon\) and every pair belongs to a unique set \(P_i\) as defined in definition~\ref{def:tame}.
+
+\begin{definition}
+  The topological complexity \(\mathbf{TC}_3(X)\) is the minimum order of instabilities of all tame motion planning algorithms in \(X\)~\cite{farber2006topology}.
+\end{definition}
+
+Before describing how \(\mathbf{TC}_4(X)\) is defined, we first introduce the complexity of random motion planning algorithms~\cite{farber2004collision}.
+
+Let \(X\) be any path-connected topological space and \(PX\) be the space of all continuous paths.
+\begin{definition}
+  For any \(A,B\in X\), let \(\gamma_1,\gamma_2,\dots,\gamma_n\in PX\) be an order sequence of continuous paths such that \(\gamma_i(0)=A,\gamma_i(1)=B\) for any \(i\), and \(p_1,p_2,\dots,p_n\in [0,1]\) is a sequence of probabilities summing to \(1\). Then a random n-valued path \(\sigma\) from \(A\) to \(B\) is defined as:
+  \[\sigma=p_1\gamma_1+\dots+p_n\gamma_n\]
+\end{definition}
+
+Let \(P_nX\) denote the set of all \(n\)-valued random paths in \(X\).
+Let \(\pi_n\) be a map from \(P_nX\) to the initial-final configuration space \(X\times X\), then \(\pi_n\) is continuous~\cite{farber2004collision}.
+Then an \emph{n-valued random motion planning algorithm} can be defined as a continuous section of \(\pi_n\), \(s:X\times X\to P_n X\).
+
+\begin{definition}
+  The topological complexity \(\mathbf{TC}_4(X)\) is defined as the minimum value \(n\) such that there exsits an \(n\)-valued random motion planning algorithm for \(X\)~\cite{farber2006topology}.
+\end{definition}
