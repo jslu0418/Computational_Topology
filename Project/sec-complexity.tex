@@ -217,3 +217,32 @@ Then an \emph{n-valued random motion planning algorithm} can be defined as a con
 \begin{definition}
   The topological complexity \(\mathbf{TC}_4(X)\) is defined as the minimum value \(n\) such that there exsits an \(n\)-valued random motion planning algorithm for \(X\)~\cite{farber2006topology}.
 \end{definition}
+
+Till now we have listed \(\mathbf{TC}_i(X),i=1,2,3,4\). Although these four different notions of topological complexity are not necessarily same, they have identical values when \(X\) is a simplicial polyhedron. Since \(\mathbf{TC}_2(X)\) is the most handy invariant comparing to others, we set \(\mathbf{TC}:=\mathbf{TC}_2\).
+Now it is natural to look at the some lower bounds of the navigational complexity.
+
+Let \(\Dim(X)\) denote the covering dimension of \(X\).
+\begin{theorem}
+If \(X\) is a path-connected paracompact locally contractible topological space, then \(\mathbf{TC}(X)\le \cat(X\times X)\le 2\Dim(X)+1\).
+\end{theorem}
+Recall that a topological space is paracompact if every open cover of it has an locally finite open refinement.
+\begin{theorem}[Farber '04~\cite{farber2004instabilities}]
+  For any \(r\)-connected CW-complex,
+  \[\mathbf{TC}(X)<\frac{2\cdot\Dim(X)+1}{r+1}+1\]
+\end{theorem}
+
+\subsection{Topological Complexity of \(F(\R^m,n)\)}
+Recall \(F(\R^m,n)\) represents the configuration space of a system with \(n\) distinct points in \(\R^m\).
+Let \(P\R^m\) denote the set of all continuous paths in \(\R^m\) such that for every path \(\gamma\), for every element \(e\in \gamma\), \(e\) has unique coordinate at each dimension in \(\R^m\).
+A valid motion planning algorithm for \(F(\R^m,n)\) is a map from \(\R^m\times \R^m\to P\R^m\).
+
+Farber and Yuzvinsky discovered the following theorem for \(\mathbf{TC}(F(\R^m,n))\) in 2004.
+\begin{theorem}
+  \[\mathbf{TC}(F(\R^m,n))=\begin{cases}
+      2n-1 \text{ \(m\) is odd,}\\
+      2n-2 \text{ \(m=2\)}.
+    \end{cases}\]
+\end{theorem}
+Moreover, they mentioned that for the cases of \(m\) is even and greater than \(2\), \(\mathbf{TC}(F(\R^m,n))\) is either \(2n-1\) or \(2n-2\). But they conjectured that this value is \(2n-2\). For the proof of the theorem, see~\cite{farber2004topological}.
+
+In this section, we have discussed about the configuration spaces of motion planning problem under several different settings such as the piano mover's problem, the robot arm problem, and the general configuration spaces for polygonal linkages. After that, we introduced and analyzed some topological complexity of the configuration spaces. There are some algorithms designed with these properties exist~\cite{farber2006topology}.
