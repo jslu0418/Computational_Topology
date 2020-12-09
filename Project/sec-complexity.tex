@@ -2,7 +2,7 @@
 %%% mode: latex
 %%% TeX-master: "report"
 %%% End:
-In this section, we first introduce a formal definition of the motion planning problem. Then we will give the topological representation of the problem. After that, we are able to start discussing about a homotopy invariant of a path-connected topological space, which is proposed by Farber in 2003~\cite{DBLP:journals/dcg/Farber03}.
+In this section, we first introduce a formal definition of the motion planning problem. Then we will give the topological representation of the problem. After that, we are ready to discuss about a homotopy invariant of a path-connected topological space, which is proposed by Farber in 2003~\cite{DBLP:journals/dcg/Farber03}.
 
 \subsection{Configuration Spaces of Motion Planning}
 The word \textit{robot} was first invented by the Czech writer Karel\u{a}pek in his play R.U.R. (Rossum's Universal Robots)~\cite{zunt2002did}. But the concept of automata, can be found in many ancient mythologies. Autonomous robots, which should be able to complete many tasks without any human's control or assistance, is an essential objective of modern robotics research.
@@ -131,6 +131,16 @@ There are also some universality theorems focusing on the topological properties
   For any smooth compact manifold \(X\), there is a linkage \(L\) of which the moduli space is diffeomorphic to a disjoint union of a number of copies of \(X\).
 \end{theorem}
 Recall that the moduli space is the solutions of a geometric problem.
+
+\subsubsection{Perceptual Control Manifold of Configuration Spaces}
+Perceptual Control Manifold (PCM) ~\cite{zeller1997motion} ~\cite{sharma1997framework} is defined on the product of robot configuration space and sensor space. It offers a flexible way of generating motion plans to exploit sensor space effectively. PCM can be approximate by Topology representing network (TRN) ~\cite{martinetz1994topology} and then combine with diffusion-based path planning strategy. Recall 3-dimensional space is described as:
+\[S^2_1\times S^2_2\times\dots\times S^2_n\]
+in vision-based control, the configuration is:
+\[C^2_1\times C^2_2\times\dots\times C^2_m\]
+where \(C_i\) is related to a set of images from one or more video cameras. In Cartesian position of robot control, the image feature can also be defined as a function \(S_i\) which maps robot configurations to image feature values. \(C_i:S_i\rightarrow  C_i.\) The PCM is a n-dimensional manifold defined on the product space \(C \times S\), as it derived from n independent joint parameters over m non-independent parameters.
+
+PCM is defined by varying all the joints \(S_i\) and  represent the hypersurface in  \(C \times S\) space for higher degree of freedom. Given one robot configuration, it maps to exactly on point on the PCM. That ensure the uniqueness for motion planning. Obstacles and other constrains can also presented in PCM. With a prior knowledge of the robot dynamics and camera parameters, we can model the PCM and conduct motion planning on the space with strategies such as TRN. In TRN, initial and target configuration is mapping to PCM, then to find the best matching to update network and recursively eliminate obstacles and diffusion. By learning the PCM, the diffusion-based startegy is able to yield motion planning with obstacle avoidance.
+
 
 \subsection{Navigational Complexity of the Motion Planning Problem}
 Farber explored the topological properties of the robot motion planning problem and showed that there is a homotopy invairant quantity of configuration spaces \(X\) called the \textit{navigational complexity} \(TC(X)\)~\cite{farber2003topological,farber2004instabilities}.
