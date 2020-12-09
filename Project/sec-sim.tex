@@ -1,0 +1,55 @@
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "report"
+%%% End:
+
+As mentioned in the introduction, many applications of robotic motion planning benefit from considering multiple homotopically distinct paths rather than a single one. For example when the planning involves multi-agent system or under uncertainty. However, it could be difficult to efficiently check if two paths belong to different homotopy classes. Denny \emph{et al.} proposed metrics to approximate the homotopic similarity between two paths and showed how to compute this approximate similarity efficiently~\cite{denny2018topology}.
+
+\subsection{Probabilistic Path Similarity Metric}
+Instead of determine if two paths are in the identical homotopy class, we want to have a metric approximate how likely two paths are in the same homotopy class.
+\begin{definition}
+  A \emph{path} \(\pi_m=\{q_1,q_2,\dots,q_m\}\) is a contiguous sequence of configurations, two configurations \(q_i,q_{i+1}\) are adjacent if \(\delta(q_i,q_{i+1})\le r\) where \(\delta\) is a distance function and \(r\) is specified in the problem.
+\end{definition}\label{def:path}
+\begin{definition}
+  Let \(\pi_m\) be a path defined above.
+  The \(t\)-resolution path \(\tau\) of \(\pi_m\) is a contiguous sequence of configurations discretized at \(t_{\mathrm{res}}\) steps, where \(t_{\mathrm{res}}\) is a resolution for a parametric representation \(t\in[0,1]\) of \(\pi_m\), where \(t=0\) is \(q_1\) and \(t=1\) is \(q_m\). Let \(\tau^k\) denote the \(k_{th}\) configuration of \(\tau\), \(k\in [0,1]\).
+\end{definition}
+Let \(A\) be the set of all \(t\)-resolution. Let \(\mu:A\times A\to [0,1]\) be a path similarity metric.
+If \(\mu\) is of high-quality, then for any two paths \(\alpha, \beta\in A\), \(\mu(\alpha,\beta)=0\) means \(\alpha\) and \(\beta\) are in different homotopy classes where \(\mu(\alpha,\beta)=1\) means their homotopy classes are identical. Moreover, for all \(0<\mu(\alpha,\beta)<1\), the value represents the probability that \(\alpha\) and \(\beta\) are with the same homotopy class.
+\subsection{Local Planner Success Similarity}
+Denny \emph{et al.} introduced a naive similarity metric based a common subroutine of sampling-based motion planners~\cite{kavraki1996probabilistic}, called the Local Planner Success Similarity (LPSS), see Figure~\ref{fig:lpss}.
+\begin{figure}
+  \begin{algo}
+    \textul{\(\textsc{Local Planner Success Similarity }(\tau_1, \tau_2, \Delta)\):}\+
+    \\ \Comment{\(\text{\(\tau_1,\tau_2\) are \(t\)-resolution paths, \(\Delta\) is a local planner.}\)}
+    \\ \(s\from 0, n\from 0\)
+    \\ for \(t\in[0,1]\) at \(t\)-resolution increments do\+
+    \\ if \(\Delta(\tau^t_1,\tau^t_2)\) then\+
+    \\ \(s\from s+1\)\-
+    \\ \(n\from n+1\)\-
+    \\ return \(\frac{s}{n}\)\-
+  \end{algo}
+  \caption{Algorithm for computing Local Planner Success Similarity}
+  \label{fig:lpss}
+\end{figure}
+The LPSS essentially computes a proportion of successful local planning attempts to total attempts between configurations of the two paths with the same \(t\) value. \(\mu=1\) in this metric guarantee the two paths are in the same homotopy class. The value of \(\mu\) close to \(1\) implies the homeomorphism between two paths are likely to exist. Conversely, If the value of \(\mu\) is near \(0\), they are unlikely in the same class. This algorithm would not yield \(0\) value since the start and goal configurations of \(\tau_1,\tau_2\) are the same. This method is not a good approximation of the similarity metric since it only tries one possible transformation. However, if it correctly determines two paths are in the same class, it has a byproduct that tell us how one can deform into another.
+\subsection{Topology-based Edit Distance Similarity}
+Based on topological reasoning, Denny \emph{et al.} suggested another similarity metric called Topology-Based Edit Distance Similarity (TBEDS)  that compares the portions of the work space each path accesses.
+As shown in Figure~\ref{fig:tbeds}, the algorithm converts each path into a string and uses edit distance as the metric.
+\begin{figure}
+  \begin{algo}
+    \textul{\(\textsc{Topology-based Edit Distance Similarity}(\tau_1, \tau_2, \Delta)\):}\+
+    \\ \Comment{\(\text{\(\tau_1,\tau_2\) are \(t\)-resolution paths, \(\Delta\) is a local planner.}\)}
+    \\ \(s_1\from\textsc{TOPOLOGYBASEDSTRING(\(\tau_1\))}\)
+    \\ \(s_2\from\textsc{TOPOLOGYBASEDSTRING(\(\tau_2\))}\)
+    \\ \(d\from\textsc{LEVENSHTEINDISTANCE(\(s_1,s_2\))}\)
+    \\ return \(1-\frac{d}{\max{(|s_1|,|s_2|)}}\)\-
+  \end{algo}
+  \caption{Algorithm for computing Topology-based Edit Distance Similarity}
+  \label{fig:tbeds}
+\end{figure}
+In this algorithm, the method for converting a path into the topology-based string assumes the work space of the robot has been tetrahedralized and converted into a Reeb Graph. For details of this method, see~\cite{denny2018topology}.
+
+If a value of one is returned in this metric, then the paths taken by the point of interest of the robot are in the same homotopy classes of the work space. However, this does not mean the homotopy classes of \(\tau_1,\tau_2\) are same. It still depends on which interest point the algorithm choose and the exact problem. On the other hand, the value close to \(0\) does imply two paths are in different homotopy classes.
+
+Applications of extracting homotopically distinct paths from a roadmap through those metric exist in~\cite{denny2018topology}.

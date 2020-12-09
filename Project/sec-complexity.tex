@@ -32,7 +32,7 @@ Therefore, the configuration space of it is a subset set of \(\R^3\).
 
 Schwartz and Sharir also give an algebraic formulation for the general version of ``Piano'' mover's problem.
 In this setting, we are considering collision-free states of some hinged object \(B\), where \(B\) can be decomposed to a finite number of rigid compact subparts \(B_1,B_2,\dots,\).
-Every rigit subpart is bounded by a number of algebraic surfaces.
+Every rigid subpart is bounded by a number of algebraic surfaces.
 Any two subparts \(B_1, B_2\) can be connected together by any one of following ways:
 \begin{enumerate}[label=\arabic*)]
 \item \(B_1\) and \(B_2\) are partially overlapping such that \(B_1\) and \(B_2\) are combined by a unique point in the overlapping part.
@@ -43,11 +43,11 @@ Any two subparts \(B_1, B_2\) can be connected together by any one of following 
 To formulate the problem algebraically, they first describe a superspace of the set of all valid states of the hinged object \(B\).
 The rotation group is a smooth \(3\)-dimensional algebraic submanifold of the \(9\)-dimensional Euclidean space of \(3\times 3\) real matrices.
 Recall that an algebraic manifold is a smooth algebraic variety.
-If \(B\) itself is minimal, i.e., \(B\) is a rigit compact subpart. Then its state can be represented by an Euclidean motion \(T\) from some base state to the given state.
+If \(B\) itself is minimal, i.e., \(B\) is a rigid compact subpart. Then its state can be represented by an Euclidean motion \(T\) from some base state to the given state.
 The transformation \(Ts=Rs+s_0\) is defined by a pair \((s_0, R)\) where \(s_0\) is a point in \(\R^3\) and \(R\) is a rotation matrix described above.
 So the transformation can be seen as a point in a smooth \(6\)-dimensional algebraic submanifold of \(\R^{12}\).
 
-Otherwise, \(B\) consists of multiple parts throught different ways listed earlier. One could find that in all cases, the overall states of all parts can be represented as a point in a smooth algebraic manifold in a Euclidean space of some dimension. For more details including a general path-finding algorithm runs in time exponential in the number of degrees of freedom of the object, we refer to ~\cite{schwartz1983piano}.
+Otherwise, \(B\) consists of multiple parts through different ways listed earlier. One could find that in all cases, the overall states of all parts can be represented as a point in a smooth algebraic manifold in a Euclidean space of some dimension. For more details including a general path-finding algorithm runs in time exponential in the number of degrees of freedom of the object, we refer to ~\cite{schwartz1983piano}.
 
 \begin{example}[The robot arm~\cite{latombe2012robot,DBLP:journals/dcg/Farber03}]
   In 1991, Latombe described a general robot arm problem. An arm is constituted by connecting a couple of bars through revolving joins as Figure~\ref{fig:arm} shows.
@@ -139,16 +139,16 @@ in vision-based control, the configuration is:
 \[C^2_1\times C^2_2\times\dots\times C^2_m\]
 where \(C_i\) is related to a set of images from one or more video cameras. In Cartesian position of robot control, the image feature can also be defined as a function \(S_i\) which maps robot configurations to image feature values. \(C_i:S_i\rightarrow  C_i.\) The PCM is a n-dimensional manifold defined on the product space \(C \times S\), as it derived from n independent joint parameters over m non-independent parameters.
 
-PCM is defined by varying all the joints \(S_i\) and  represent the hypersurface in  \(C \times S\) space for higher degree of freedom. Given one robot configuration, it maps to exactly on point on the PCM. That ensure the uniqueness for motion planning. Obstacles and other constrains can also presented in PCM. With a prior knowledge of the robot dynamics and camera parameters, we can model the PCM and conduct motion planning on the space with strategies such as TRN. In TRN, initial and target configuration is mapping to PCM, then to find the best matching to update network and recursively eliminate obstacles and diffusion. By learning the PCM, the diffusion-based startegy is able to yield motion planning with obstacle avoidance.
+PCM is defined by varying all the joints \(S_i\) and  represent the hypersurface in  \(C \times S\) space for higher degree of freedom. Given one robot configuration, it maps to exactly on point on the PCM. That ensure the uniqueness for motion planning. Obstacles and other constrains can also presented in PCM. With a prior knowledge of the robot dynamics and camera parameters, we can model the PCM and conduct motion planning on the space with strategies such as TRN. In TRN, initial and target configuration is mapping to PCM, then to find the best matching to update network and recursively eliminate obstacles and diffusion. By learning the PCM, the diffusion-based strategy is able to yield motion planning with obstacle avoidance.
 
 
 \subsection{Navigational Complexity of the Motion Planning Problem}
-Farber explored the topological properties of the robot motion planning problem and showed that there is a homotopy invairant quantity of configuration spaces \(X\) called the \textit{navigational complexity} \(TC(X)\)~\cite{farber2003topological,farber2004instabilities}.
-This invariant  explains how knowing the cohomology algebra of
+Farber explored the topological properties of the robot motion planning problem and showed that there is a homotopy invariant quantity of configuration spaces \(X\) called the \textit{navigational complexity} \(TC(X)\)~\cite{farber2003topological,farber2004instabilities}.
+This invariant explains how knowing the cohomology algebra of
 configuration space of a robot one may predict instabilities of its behavior.
 
 Let \(X\) denote the configuration space of a mechanical system \(S\)
-Then we can use a continious path \(\gamma:[0,1]\to X\) to represent a sequence of continuous motions of \(S\) where \(\gamma(0),\gamma(1)\) are the initial and final states of the system, respectively.
+Then we can use a continuous path \(\gamma:[0,1]\to X\) to represent a sequence of continuous motions of \(S\) where \(\gamma(0),\gamma(1)\) are the initial and final states of the system, respectively.
 
 If \(X\) is path-connected, it is easy to see that one may move the system between any two states.
 Let \(PX\) denote the space of all these continuous paths.
@@ -158,7 +158,7 @@ Then \(\pi\) is a Serre fibration.
 On the other hand, a motion planning algorithm is a function \(s:X\times X\to PX\), and \(s\) is a section of \(\pi\).
 
 Now we are going to learn the continuity of motion planning algorithms.
-We say a motion planning algorithm \(s\) is continuous if solutions \(s(A,B)\) for all \(A,B\in X\times X\) continously depend on initial-final states \(A\) and \(B\).
+We say a motion planning algorithm \(s\) is continuous if solutions \(s(A,B)\) for all \(A,B\in X\times X\) continuously depend on initial-final states \(A\) and \(B\).
 
 \begin{lemma}[Farber '03~\cite{farber2003topological}]
 There exists a continuous motion planning algorithm for a configuration space \(X\) if and only if \(X\) is contractible.
@@ -171,7 +171,7 @@ To describe those, we first use four distinct notions of navigational complexity
 
 A topological space \(X\) is called an \textit{Euclidean Neighbourhood Retract} if it can be embedded into an Euclidean space \(\R^k\) such that for some open neighbourhood \(U, X\subset U\subset \R^k\), there exists a retraction \(r:U\to X,r|_X=\mathbf{1}_X\)~\cite{farber2004instabilities}.
 \begin{definition}\label{def:tame}
-  A motion planning algorithm \(s:X\times X\to PX\) is called \emph{tame} if \(X\times X=\Union_{1\le i\le k} P_i\) for some finited number \(k\) such that
+  A motion planning algorithm \(s:X\times X\to PX\) is called \emph{tame} if \(X\times X=\Union_{1\le i\le k} P_i\) for some finite number \(k\) such that
   \begin{enumerate}[label=\arabic*)]
   \item \(s|_{P_i}:P_i\to PX, 1\le i\le k\) is continuous.
   \item All \(P_i\) are disjoint with each other.
@@ -225,7 +225,7 @@ Let \(\pi_n\) be a map from \(P_nX\) to the initial-final configuration space \(
 Then an \emph{n-valued random motion planning algorithm} can be defined as a continuous section of \(\pi_n\), \(s:X\times X\to P_n X\).
 
 \begin{definition}
-  The topological complexity \(\mathbf{TC}_4(X)\) is defined as the minimum value \(n\) such that there exsits an \(n\)-valued random motion planning algorithm for \(X\)~\cite{farber2006topology}.
+  The topological complexity \(\mathbf{TC}_4(X)\) is defined as the minimum value \(n\) such that there exists an \(n\)-valued random motion planning algorithm for \(X\)~\cite{farber2006topology}.
 \end{definition}
 
 Till now we have listed \(\mathbf{TC}_i(X),i=1,2,3,4\). Although these four different notions of topological complexity are not necessarily same, they have identical values when \(X\) is a simplicial polyhedron. Since \(\mathbf{TC}_2(X)\) is the most handy invariant comparing to others, we set \(\mathbf{TC}:=\mathbf{TC}_2\).
